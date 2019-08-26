@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -46,7 +49,10 @@ public class SeleniumHokushinHPChrome {
       //スクリーンショット保存フォルダ+ファイル名共通部
         String saveFolder = "./screenShots/";
 
-        //driverはchromeがはいっている→index.phpに遷移しろというている
+      //カレントウインドウを最大化する
+	    driver.manage().window().maximize();
+
+        //driverはchromeがはいっている→https://ae1036569i.smartrelease.jpに遷移しろというている
 //        driver.get("http://192.168.71.208/hokushin_util/index.php");
         driver.get("https://ae1036569i.smartrelease.jp");
 
@@ -101,34 +107,38 @@ public class SeleniumHokushinHPChrome {
 
 
            //サービス
-           //クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions
-                    .visibilityOfElementLocated(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
+//           //クリック対象要素が表示されるまで待つ
+//			wait.until(ExpectedConditions
+//                    .visibilityOfElementLocated(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
+//
+//			//クリック準備
+//			//driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).sendKeys(Keys.CONTROL);
+//
+//			//クリック
+//            driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).click();
+//
+//			 //クリック対象要素が表示されるまで待つ
+//			wait.until(ExpectedConditions
+//                   .visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
+//
+//
+//	        //キャプチャ
+//            sfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//
+//            //コピー先の指定→ファイル名に時刻付加
+//            nowLocalDt = LocalDateTime.now();
+//            localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
+//            destFileName = saveFolder + localTimeStr1 + "サービス画面.png";
+//            System.out.println("ファイル名" + destFileName);
+//
+//            //キャプチャ一時画像を消える前にコピー
+//            sourcePath = Paths.get(sfile.getAbsolutePath());
+//            targetPath = Paths.get(destFileName);
+//            Files.move(sourcePath, targetPath);
 
-			//クリック準備
-			//driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).sendKeys(Keys.CONTROL);
+           ServiceCheck serviceCheck = new ServiceCheck();
 
-			//クリック
-            driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).click();
-
-			 //クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions
-                   .visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-
-	        //キャプチャ
-            sfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
-            //コピー先の指定→ファイル名に時刻付加
-            nowLocalDt = LocalDateTime.now();
-            localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-            destFileName = saveFolder + localTimeStr1 + "サービス画面.png";
-            System.out.println("ファイル名" + destFileName);
-
-            //キャプチャ一時画像を消える前にコピー
-            sourcePath = Paths.get(sfile.getAbsolutePath());
-            targetPath = Paths.get(destFileName);
-            Files.move(sourcePath, targetPath);
+           serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 
 //         // pagedown 押下
 //            act.sendKeys(Keys.PAGE_DOWN);
@@ -155,6 +165,13 @@ public class SeleniumHokushinHPChrome {
 
 	        //chrome終了
 	        driver.quit();
+
+            JOptionPane pane = new JOptionPane("処理が終了しました。" , JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = pane.createDialog(null, "seleniumHokushinHp");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
+            System.out.println("*** 終了メッセージ表示終了");
+            dialog.dispose();
 
 
         } catch (InterruptedException e) {
