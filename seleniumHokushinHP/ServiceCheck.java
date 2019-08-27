@@ -35,9 +35,10 @@ public class ServiceCheck {
 
 		captureUtil.cupturePage(driver,  saveFolder,"サービス");
 
+		//スクロールさせたい場合（例）;
+		//画面をスクロールさせるためActionクラスのインスタンスを作成
 		Actions act = new Actions(driver);
 
-		//スクロールさせたい場合（例）;
 		//フッターのロゴまで画面を移動
 		act.moveToElement(driver.findElement(
 				By.cssSelector("#privacymark-logo")));

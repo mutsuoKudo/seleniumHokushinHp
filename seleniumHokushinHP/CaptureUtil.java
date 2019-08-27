@@ -18,11 +18,11 @@ public class CaptureUtil {
 		//キャプチャ
 		File sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-		//コピー先の指定→ファイル名に時刻付加
+		//コピー先の指定→ファイル名に時刻、画面名付加
 		LocalDateTime nowLocalDt = LocalDateTime.now();
 		String localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
 		String destFileName = saveFolder + localTimeStr1 + gamenName + "画面.png";
-		System.out.println("ファイル名" + destFileName);
+		System.out.println("ファイル名:" + destFileName);
 
 		//キャプチャ一時画像を消える前にコピー
 		Path sourcePath = Paths.get(sfile.getAbsolutePath());

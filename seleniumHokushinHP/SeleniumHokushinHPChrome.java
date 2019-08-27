@@ -94,7 +94,7 @@ public class SeleniumHokushinHPChrome {
            nowLocalDt = LocalDateTime.now();
            localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
            String destFileName = saveFolder + localTimeStr1 + "会社概要画面.png";
-           System.out.println("ファイル名" + destFileName);
+           System.out.println("ファイル名:" + destFileName);
 
            //キャプチャ一時画像を消える前にコピー
            Path sourcePath = Paths.get(sfile.getAbsolutePath());
