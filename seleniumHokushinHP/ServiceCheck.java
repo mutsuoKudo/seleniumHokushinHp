@@ -17,9 +17,6 @@ public class ServiceCheck {
 				.visibilityOfElementLocated(By.cssSelector(
 						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
 
-		//クリック準備
-		//driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).sendKeys(Keys.CONTROL);
-
 		//クリック
 		driver.findElement(
 				By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
