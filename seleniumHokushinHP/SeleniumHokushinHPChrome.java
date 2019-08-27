@@ -107,60 +107,14 @@ public class SeleniumHokushinHPChrome {
 
 
            //サービス
-//           //クリック対象要素が表示されるまで待つ
-//			wait.until(ExpectedConditions
-//                    .visibilityOfElementLocated(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
-//
-//			//クリック準備
-//			//driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).sendKeys(Keys.CONTROL);
-//
-//			//クリック
-//            driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).click();
-//
-//			 //クリック対象要素が表示されるまで待つ
-//			wait.until(ExpectedConditions
-//                   .visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-//
-//
-//	        //キャプチャ
-//            sfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//
-//            //コピー先の指定→ファイル名に時刻付加
-//            nowLocalDt = LocalDateTime.now();
-//            localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-//            destFileName = saveFolder + localTimeStr1 + "サービス画面.png";
-//            System.out.println("ファイル名" + destFileName);
-//
-//            //キャプチャ一時画像を消える前にコピー
-//            sourcePath = Paths.get(sfile.getAbsolutePath());
-//            targetPath = Paths.get(destFileName);
-//            Files.move(sourcePath, targetPath);
 
            ServiceCheck serviceCheck = new ServiceCheck();
 
            serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 
-//         // pagedown 押下
-//            act.sendKeys(Keys.PAGE_DOWN);
-//
-//          //しばらく待って
-//	        Thread.sleep(1000);
-//
-//	        //キャプチャ
-//           sfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//
-//            //コピー先の指定→ファイル名に時刻付加
-//            nowLocalDt = LocalDateTime.now();
-//            localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-//            destFileName = saveFolder + localTimeStr1 + "サービス画面スクロール後.png";
-//            System.out.println("ファイル名" + destFileName);
-//
-//            //キャプチャ一時画像を消える前にコピー
-//            sourcePath = Paths.get(sfile.getAbsolutePath());
-//            targetPath = Paths.get(destFileName);
-//            Files.move(sourcePath, targetPath);
 
-		    //しばらく待って
+
+		    //終了のためしばらく待って
 	        Thread.sleep(500);  // Let the user actually see something!
 
 	        //chrome終了

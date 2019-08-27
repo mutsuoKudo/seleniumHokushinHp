@@ -37,8 +37,8 @@ public class ServiceCheck {
 
 		Actions act = new Actions(driver);
 
-//		act.sendKeys(Keys.PAGE_DOWN);
-
+		//スクロールさせたい場合（例）;
+		//フッターのロゴまで画面を移動
 		act.moveToElement(driver.findElement(
 				By.cssSelector("#privacymark-logo")));
 		act.perform();
@@ -46,21 +46,10 @@ public class ServiceCheck {
 		//しばらく待って
         Thread.sleep(1000);
 
+        //キャプチャー
 		captureUtil.cupturePage(driver,  saveFolder,"サービススクロール後");
 
-//		//キャプチャ
-//		File sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-//
-//		//コピー先の指定→ファイル名に時刻付加
-//		LocalDateTime nowLocalDt = LocalDateTime.now();
-//		String localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-//		String destFileName = saveFolder + localTimeStr1 + "会社概要画面.png";
-//		System.out.println("ファイル名" + destFileName);
-//
-//		//キャプチャ一時画像を消える前にコピー
-//		Path sourcePath = Paths.get(sfile.getAbsolutePath());
-//		Path targetPath = Paths.get(destFileName);
-//		Files.move(sourcePath, targetPath);
+
 	}
 
 }
