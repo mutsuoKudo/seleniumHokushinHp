@@ -1,24 +1,15 @@
 package seleniumHokushinHP;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumHokushinHPChrome {
@@ -57,1607 +48,657 @@ public class SeleniumHokushinHPChrome {
 		driver.get("https://ae1036569i.smartrelease.jp/");
 
 		try {
+			//カレントウインドウを最大化する
+			driver.manage().window().maximize();
 			//ちょっとだけ待つ
-			Thread.sleep(10);// Let the user actually see something!
+			Thread.sleep(10);// Let the user actually see something!!
+			TopCheck topCheck = new TopCheck();
+			CompanyCheck companyCheck = new CompanyCheck();
+			PhilosophyCheck philosophyCheck = new PhilosophyCheck();
+			PartnersynergyCheck partnersynergyCheck = new PartnersynergyCheck();
+			ServiceCheck serviceCheck = new ServiceCheck();
+			JobcategoryCheck jobcategoryCheck = new JobcategoryCheck();
+			WelfareCheck welfareCheck = new WelfareCheck();
+			TrainingCheck trainingCheck = new TrainingCheck();
+			VoicesCheck voicesCheck = new VoicesCheck();
+			EntryCheck entryCheck = new EntryCheck();
+			ContactCheck contactCheck = new ContactCheck();
 
-//トップページについてここから
-//トップページのナビゲーションバーここから
-//会社概要
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
+			//トップページについてここから
+			//	//トップページのナビゲーションバーここから
 
-			//クリック準備
-			//driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).sendKeys(Keys.CONTROL);
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a"))
-					.click();
-			System.out.println("会社概要クリック");
-
-			//クリック対象要素が表示されるまで待つ（Companyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			File sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			String destFileName = saveFolder + localTimeStr1 + "会社概要画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			Path sourcePath = Paths.get(sfile.getAbsolutePath());
-			Path targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要キャプチャ");
-
-			////会社概要NEWS
-			//          //クリック(会社概要のNEWS)
-			//           driver.findElement(By.cssSelector("li > a")).click();
+			//						//トップページからトップページ
+			//						topCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 			//
-			//           //クリック対象要素が表示されるまで待つ(会社概要のNEWSモーダル)
-			//			wait.until(ExpectedConditions
-			//                  .visibilityOfElementLocated(By.cssSelector("#modal01-label\\ font-weight-bold\\ text-center")));
+			//						//トップページから会社概要
+			////						CompanyCheck companyCheck = new CompanyCheck();
+			//						companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 			//
-			//			//キャプチャ
-			//	         sfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
 			//
-			//	         //コピー先の指定→ファイル名に時刻付加
-			//	         nowLocalDt = LocalDateTime.now();
-			//	         localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			//	         destFileName = saveFolder + localTimeStr1 + "会社概要NEWS.png";
-			//	         System.out.println("ファイル名" + destFileName);
+			//						//トップページから理念
+			//						philosophyCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 			//
-			//	         //キャプチャ一時画像を消える前にコピー
-			//	         sourcePath = Paths.get(sfile.getAbsolutePath());
-			//	         targetPath = Paths.get(destFileName);
-			//	         Files.move(sourcePath, targetPath);
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
 			//
-			//	       //クリック(会社概要のNEWSモーダル閉じるボタン)
-			//	           driver.findElement(By.cssSelector("#about-modal > div > div > div.modal-header.hs-recruit-modal-header > button")).click();
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//理念
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの理念)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a")));
-
-			//クリック(ナビゲーションバーの理念)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a"))
-					.click();
-			System.out.println("理念クリック");
-
-			//クリック対象要素が表示されるまで待つ（Philosophyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "理念画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("理念キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//パートナーシナジー
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーのパートナーシナジー)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(3) > a")));
-
-			//クリック(ナビゲーションバーのパートナーシナジー)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(3) > a"))
-					.click();
-			System.out.println("パートナーシナジークリック");
-
-			//クリック対象要素が表示されるまで待つ（PartnerSynergyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "パートナーシナジー画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("パートナーシナジーキャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//サービス
-			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
-
-			//クリック準備
-			//driver.findElement(By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")).sendKeys(Keys.CONTROL);
-
-			//クリック
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
-					.click();
-			System.out.println("サービスクリック");
-
-			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "サービス画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("サービスキャプチャ");
-
-			//         // pagedown 押下
-			//            act.sendKeys(Keys.PAGE_DOWN);
+			//						//トップページからパートナーシナジー
+			//						partnersynergyCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 			//
-			//          //しばらく待って
-			//	        Thread.sleep(1000);
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
 			//
-			//	        //キャプチャ
-			//           sfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			//						//トップページからサービス
+			//						ServiceCheck serviceCheck = new ServiceCheck();
+			//						serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 			//
-			//            //コピー先の指定→ファイル名に時刻付加
-			//            nowLocalDt = LocalDateTime.now();
-			//            localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			//            destFileName = saveFolder + localTimeStr1 + "サービス画面スクロール後.png";
-			//            System.out.println("ファイル名" + destFileName);
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+
+			//						//トップページから募集一覧
+			//						jobcategoryCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 			//
-			//            //キャプチャ一時画像を消える前にコピー
-			//            sourcePath = Paths.get(sfile.getAbsolutePath());
-			//            targetPath = Paths.get(destFileName);
-			//            Files.move(sourcePath, targetPath);
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//募集一覧
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの募集一覧)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a")));
-
-			//クリック(ナビゲーションバーの募集一覧)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a"))
-					.click();
-			System.out.println("募集一覧クリック");
-
-			//クリック対象要素が表示されるまで待つ（JobCategoryタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "募集一覧画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("募集一覧キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//福利厚生
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの福利厚生)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a")));
-
-			//クリック(ナビゲーションバーの福利厚生)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a"))
-					.click();
-			System.out.println("福利厚生クリック");
-
-			//クリック対象要素が表示されるまで待つ（Welfareタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "福利厚生画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("福利厚生キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//教育・研修
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの募集一覧)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(3) > a")));
-
-			//クリック(ナビゲーションバーの募集一覧)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(3) > a"))
-					.click();
-			System.out.println("募集一覧クリック");
-
-			//クリック対象要素が表示されるまで待つ（Trainingタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "教育・研修画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("教育・研修キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//社員の声
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの社員の声)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(4) > a")));
-
-			//クリック(ナビゲーションバーの社員の声)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(4) > a"))
-					.click();
-			System.out.println("募集一覧クリック");
-
-			//クリック対象要素が表示されるまで待つ（Voicesタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "社員の声画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("社員の声キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//エントリー
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(4) > a > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーのエントリー)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(5) > a")));
-
-			//クリック(ナビゲーションバーのエントリー)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(5) > a"))
-					.click();
-			System.out.println("募集一覧クリック");
-
-			//クリック対象要素が表示されるまで待つ（ApplicationFormタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "エントリー画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("エントリーキャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//お問い合わせ
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーのお問い合わせ)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(5) > a > span")));
-
-			//クリック(ナビゲーションバーのお問い合わせ)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(5) > a > span"))
-					.click();
-			System.out.println("お問い合わせクリック");
-
-			//クリック対象要素が表示されるまで待つ（Contactタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "お問い合わせ画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("お問い合わせキャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//トップページのナビゲーションバーここまで
-
-//トップページの梅アイコンここから
-
-//梅アイコン左から一番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から一番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(1) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から一番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(1) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から一番目");
-
-			//クリック対象要素が表示されるまで待つ（会社概要：Companyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからの会社概要画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからの会社概要キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から二番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から二番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(2) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から二番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(2) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から二番目");
-
-			//クリック対象要素が表示されるまで待つ（理念：Philosophyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからの理念画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからの理念キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から三番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から三番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(3) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から三番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(3) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から三番目");
-
-			//クリック対象要素が表示されるまで待つ（パートナーシナジー：PartnerSynergyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからのパートナーシナジー画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからのパートナーシナジーキャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から四番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から四番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(4) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から四番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(4) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から四番目");
-
-			//クリック対象要素が表示されるまで待つ（パートナーシナジー：PartnerSynergyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからのサービス画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからのサービスキャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から五番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から五番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(5) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から五番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(5) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から五番目");
-
-			//クリック対象要素が表示されるまで待つ（募集一覧：JobCategoryタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからの募集一覧画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからの募集一覧キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から六番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から六番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(6) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から六番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(6) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から六番目");
-
-			//クリック対象要素が表示されるまで待つ（福利厚生：Welfareタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからの福利厚生画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからの福利厚生キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から七番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から七番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(7) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から七番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(7) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から七番目");
-
-			//クリック対象要素が表示されるまで待つ（教育・研修：Trainingタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからの教育・研修画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからの教育・研修キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//梅アイコン左から八番目
-			//クリック対象要素が表示されるまで待つ(梅アイコン左から八番目)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(8) > div > p.hs-icon > a")));
-
-			//クリック(梅アイコン左から八番目)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(8) > div > p.hs-icon > a"))
-					.click();
-			System.out.println("梅アイコン左から八番目");
-
-			//クリック対象要素が表示されるまで待つ（社員の声：Voicesタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "梅アイコンからの社員の声画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("梅アイコンからの社員の声キャプチャ");
-
-			//ホームに戻る
-			//クリック
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("ホームボタンクリック");
-
-//トップページの梅アイコンここまで
-
-//トップページヘッダーロゴここから
-
-			//クリック対象要素が表示されるまで待つ(トップページヘッダーロゴ)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("body > div.hs-base-container > nav > div.w-100 > a")));
-
-			//クリック(トップページヘッダーロゴ)
-			driver.findElement(By.cssSelector("body > div.hs-base-container > nav > div.w-100 > a")).click();
-			System.out.println("トップページヘッダーロゴ");
-
-			//クリック対象要素が表示されるまで待つ（トップページヘッダーロゴimg）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.hs-base-container > nav > div.w-100 > a > img")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "トップページヘッダーロゴからのトップ画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("トップページヘッダーロゴからのトップキャプチャ");
-
-			//すでにトップにいるため戻りはなし。
-
-//トップページヘッダーロゴここまで
-
-//トップページフッタここから
-
-//トップページフッターロゴ
-			//クリック対象要素が表示されるまで待つ(トップページフッターロゴ)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("body > div.hs-base-container > nav > div.w-100 > a")));
-
-			//クリック(トップページフッターロゴ)
-			driver.findElement(By.cssSelector("#footer-comtent-comp-left > a")).click();
-			System.out.println("トップページフッターロゴ");
-
-			//クリック対象要素が表示されるまで待つ（トップページフッターロゴimg）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#footer-logo")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "トップページフッターロゴからのトップ画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("トップページフッターロゴからのトップキャプチャ");
-
-			//すでにトップにいるため戻りはなし。
-
-//トップページフッターここまで
-//トップページについてここまで
-
-
-//会社概要についてここから
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からのトップページ
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーホーム)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-18 > a > span")));
-
-			//クリック(ナビゲーションバーホーム)
-			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			System.out.println("プライバシーマーク");
-
-			//クリック対象要素が表示されるまで待つ（トップページ）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#privacymark-logo")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からのトップ画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からのトップキャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からの理念
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（理念）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a:nth-child(2)")));
-
-			//クリック(ナビゲーションバーの理念)
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a:nth-child(2)"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（Philosophyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からの理念画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からの理念キャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からのパートナーシナジー
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（パートナーシナジー）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a:nth-child(3)")));
-
-			//クリック(ナビゲーションバーのパートナーシナジー)
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a:nth-child(3)"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（PartnerSynergyタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からのパートナーシナジー画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からの理念キャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からのサービス
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーのサービス)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-20 > a > span")));
-
-			//クリック(ナビゲーションバーのサービス)
-			driver.findElement(By
-					.cssSelector("#menu-item-20 > a > span"))
-					.click();
-			System.out.println("サービスクリック");
-
-			//クリック対象要素が表示されるまで待つ（Serviceタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からのサービス画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からのサービスキャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からの募集一覧
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownRecruit > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownRecruit > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（募集一覧）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの募集一覧)
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（JobCategoryタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からの募集一覧画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からの募集一覧キャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からの福利厚生
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownRecruit > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownRecruit > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（福利厚生
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a:nth-child(2)")));
-
-			//クリック(ナビゲーションバーの福利厚生
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a:nth-child(2)"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（Welfareタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からの福利厚生画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からの福利厚生キャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からの教育・研修
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownRecruit > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownRecruit > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（教育・研修）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a:nth-child(3)")));
-
-			//クリック(ナビゲーションバーの教育・研修
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a:nth-child(3)"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（Trainingタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からの教育・研修画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からの教育・研修キャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からの社員の声
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownRecruit > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownRecruit > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（社員の声）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a:nth-child(4)")));
-
-			//クリック(ナビゲーションバーの社員の声
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a:nth-child(4)"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（Voicesタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からの社員の声画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からの社員の声キャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からのエントリー
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの採用情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownRecruit > span")));
-
-			//クリック(ナビゲーションバーの採用情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownRecruit > span"))
-					.click();
-			System.out.println("採用情報クリック");
-
-			//クリック対象要素が表示されるまで待つ（エントリー）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector("#menu-item-22 > div > a:nth-child(5)")));
-
-			//クリック(ナビゲーションバーのエントリー
-			driver.findElement(By
-					.cssSelector("#menu-item-22 > div > a:nth-child(5)"))
-					.click();
-
-			//クリック対象要素が表示されるまで待つ（ApplicationFormタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からのエントリー画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からのエントリーキャプチャ");
-
-			//会社概要に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-			//クリック(ナビゲーションバーの会社概要)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-//会社概要からのお問合せ
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーのお問合せ)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-19 > a > span")));
-
-			//クリック(ナビゲーションバーのサービス)
-			driver.findElement(By
-					.cssSelector("#menu-item-19 > a > span"))
-					.click();
-			System.out.println("お問合せクリック");
-
-			//クリック対象要素が表示されるまで待つ（Contactタイトル）
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(
-							By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-
-			//キャプチャ
-			sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-			//コピー先の指定→ファイル名に時刻付加
-			nowLocalDt = LocalDateTime.now();
-			localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
-			destFileName = saveFolder + localTimeStr1 + "会社概要からのサービス画面.png";
-			System.out.println("ファイル名" + destFileName);
-
-			//キャプチャ一時画像を消える前にコピー
-			sourcePath = Paths.get(sfile.getAbsolutePath());
-			targetPath = Paths.get(destFileName);
-			Files.move(sourcePath, targetPath);
-
-			System.out.println("会社概要からのサービスキャプチャ");
-
-//理念に戻る
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#navbarDropdownCompany > span")));
-
-			//クリック(ナビゲーションバーの企業情報)
-			driver.findElement(By
-					.cssSelector("#navbarDropdownCompany > span"))
-					.click();
-			System.out.println("企業情報クリック");
-
-			//クリック対象要素が表示されるまで待つ(ナビゲーションバーの理念)
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.cssSelector(
-							"#menu-item-22 > div > a:nth-child(2)")));
-
-			//クリック(ナビゲーションバーの理念)
-			driver.findElement(By.cssSelector(
-					"#menu-item-22 > div > a:nth-child(2)"))
-					.click();
-			System.out.println("会社概要クリック");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			//しばらく待って
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページから福利厚生
+			//						welfareCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページから教育・研修
+			//						trainingCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページから社員の声
+			//						voicesCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページからエントリー
+			//						entryCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページからお問合せ
+			//						contactCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページのナビゲーションバーここまで
+			//
+			//						//トップページの梅アイコンここから
+			//
+			//						//梅アイコン左から一番目
+			//						Plum1Check plum1Check = new Plum1Check();
+			//						plum1Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から二番目
+			//						Plum2Check plum2Check = new Plum2Check();
+			//						plum2Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から三番目
+			//						Plum3Check plum3Check = new Plum3Check();
+			//						plum3Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から四番目
+			//						Plum4Check plum4Check = new Plum4Check();
+			//						plum4Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から五番目
+			//						Plum5Check plum5Check = new Plum5Check();
+			//						plum5Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から六番目
+			//						Plum6Check plum6Check = new Plum6Check();
+			//						plum6Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から七番目
+			//						Plum7Check plum7Check = new Plum7Check();
+			//						plum7Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//梅アイコン左から八番目
+			//						Plum8Check plum8Check = new Plum8Check();
+			//						plum8Check.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページの梅アイコンここまで
+			//
+			//						//トップページヘッダーロゴここから
+			//
+			//						HeaderlogoCheck headerlogoCheck = new HeaderlogoCheck();
+			//						headerlogoCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			////						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページヘッダーロゴここまで
+			//
+			//						//トップページフッターここから
+			//						//トップページフッターロゴ
+			//
+			//						FooterlogoCheck footerlogoCheck = new FooterlogoCheck();
+			//						footerlogoCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			//
+			//						//トップページに戻る
+			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//
+			//						//トップページフッターここまで
+			//						//トップページについてここまで
+//
+//			//会社概要についてここから
+//			//トップページから会社概要へとぶ
+//			companyCheck.toCompany(driver, wait, saveFolder);
+//
+//			//会社概要からトップページ
+//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			topCheck.captureFromCompany(driver, wait, saveFolder);
+//
+//			//トップページから会社概要に戻る(トップページから会社概要へとぶ)
+//			companyCheck.toCompany(driver, wait, saveFolder);
+//
+//			//会社概要から会社概要
+//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			companyCheck.captureFromCompany(driver, wait, saveFolder);
+//
+//			//会社概要に戻る
+//			companyCheck.backToCompany(driver, wait, saveFolder);
+//
+//			//会社概要から理念
+//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			philosophyCheck.captureFromCompany(driver, wait, saveFolder);
+//
+//			//会社概要に戻る
+//			companyCheck.backToCompany(driver, wait, saveFolder);
+//
+//			//会社概要からパートナーシナジー
+//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			partnersynergyCheck.captureFromCompany(driver, wait, saveFolder);
+//
+//			//会社概要に戻る
+//			companyCheck.backToCompany(driver, wait, saveFolder);
+//
+//			//会社概要からサービス
+//
+//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			serviceCheck.captureFromCompany(driver, wait, saveFolder);
+//
+//			//会社概要に戻る
+//			companyCheck.backToCompany(driver, wait, saveFolder);
+//
+			//						//会社概要から募集一覧
+			//						jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						jobcategoryCheck.captureFromCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要に戻る
+			//						companyCheck.backToCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要から福利厚生
+			//						welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						welfareCheck.captureFromCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要に戻る
+			//						companyCheck.backToCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要から教育・研修
+			//						trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						trainingCheck.captureFromCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要に戻る
+			//						companyCheck.backToCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要から社員の声
+			//						voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						voicesCheck.captureFromCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要に戻る
+			//						companyCheck.backToCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要からエントリー
+			//						entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						voicesCheck.captureFromCompany(driver, wait, saveFolder);
+			//
+			//						//会社概要に戻る
+			//						companyCheck.backToCompany(driver, wait, saveFolder);
+//
+//			//会社概要からお問合せ
+//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			contactCheck.captureFromCompany(driver, wait, saveFolder);
+//
+//			//会社概要に戻る
+//			companyCheck.backToCompany(driver, wait, saveFolder);
+//
+//			//トップページに戻る
+//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+//
+//			//会社概要についてここまで
+//
+//			//理念についてここから
+//			//トップページから理念へとぶ
+//			philosophyCheck.toPhilosophy(driver, wait, saveFolder);
+//
+//			//理念からトップページ
+//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			topCheck.captureFromPhilosophy(driver, wait, saveFolder);
+//
+//			//トップページから理念に戻る(トップページから理念へとぶ)
+//			philosophyCheck.toPhilosophy(driver, wait, saveFolder);
+//
+//			//理念から会社概要
+//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			companyCheck.captureFromPhilosophy(driver, wait, saveFolder);
+//
+//			//理念に戻る
+//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+//
+//			//理念から理念
+//			//			PhilosophyCheck philosophyCheck = new PhilosophyCheck();
+//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			philosophyCheck.captureFromPhilosophy(driver, wait, saveFolder);
+//
+//			//理念に戻る
+//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+//
+//			//理念からパートナーシナジー
+//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			partnersynergyCheck.captureFromPhilosophy(driver, wait, saveFolder);
+//
+//			//理念に戻る
+//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+//
+//			//理念からサービス
+//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			serviceCheck.captureFromPhilosophy(driver, wait, saveFolder);
+//
+//			//理念に戻る
+//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+//
+			//						//理念から募集一覧
+			//						jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						jobcategoryCheck.captureFromPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念に戻る
+			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念から福利厚生
+			//
+			//						welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						welfareCheck.captureFromPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念に戻る
+			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念から教育・研修
+			//						trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						trainingCheck.captureFromPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念に戻る
+			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念から社員の声
+			//						voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						voicesCheck.captureFromPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念に戻る
+			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念からエントリー
+			//						entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//						entryCheck.captureFromPhilosophy(driver, wait, saveFolder);
+			//
+			//						//理念に戻る
+			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+//
+//			//理念からお問合せ
+//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			contactCheck.captureFromPhilosophy(driver, wait, saveFolder);
+//
+//			//理念に戻る
+//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
+//
+//			//トップページに戻る
+//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+//
+//			//理念についてここまで
+//
+//			//パートナーシナジーについてここから
+//			//トップページからパートナーシナジーへとぶ
+//			partnersynergyCheck.toPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーからトップページ
+//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			topCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+//
+//			//トップページから理念に戻る(トップページから理念へとぶ)
+//			partnersynergyCheck.toPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーから会社概要
+//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			companyCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーに戻る
+//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーから理念
+//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			philosophyCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーに戻る
+//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーからパートナーシナジー
+//			//			PartnersynergyCheck partnersynergyCheck = new PartnersynergyCheck();
+//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			partnersynergyCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーに戻る
+//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーからサービス
+//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			serviceCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーに戻る
+//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+//
+			//			//パートナーシナジーから募集一覧
+			//
+			//			jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			jobcategoryCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーに戻る
+			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーから福利厚生
+			//			welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			welfareCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーに戻る
+			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーから教育・研修
+			//			trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			trainingCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーに戻る
+			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーから社員の声
+			//			voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			voicesCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーに戻る
+			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーからエントリー
+			//			entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			entryCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+			//
+			//			//パートナーシナジーに戻る
+			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+
+//			//パートナーシナジーからお問合せ
+//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			contactCheck.captureFromPartnersynergy(driver, wait, saveFolder);
+//
+//			//パートナーシナジーに戻る
+//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+//
+//			//トップページに戻る
+//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+//			//パートナーシナジーについてここまで
+//
+//			//サービスについてここから
+//			//トップページからサービスへとぶ
+//			serviceCheck.toService(driver, wait, saveFolder);
+//
+//			//サービスからトップページ
+//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			topCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//トップページからサービスに戻る(トップページから理念へとぶ)
+//			serviceCheck.toService(driver, wait, saveFolder);
+//
+//			//サービスから会社概要
+//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			companyCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//サービスに戻る
+//			serviceCheck.backToService(driver, wait, saveFolder);
+//
+//			//サービスから理念
+//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			philosophyCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//サービスに戻る
+//			serviceCheck.backToService(driver, wait, saveFolder);
+//
+//			//サービスからパートナーシナジー
+//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			partnersynergyCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//サービスに戻る
+//			serviceCheck.backToService(driver, wait, saveFolder);
+//
+//			//サービスからサービス
+//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			serviceCheck.captureFromService(driver, wait, saveFolder);
+
+//			//サービスに戻る（これいらない）
+//			serviceCheck.backToService(driver, wait, saveFolder);
+
+			//			//サービスから募集一覧
+			//			jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			jobcategoryCheck.captureFromService(driver, wait, saveFolder);
+			//
+			//			//サービスに戻る
+			//			serviceCeck.backToService(driver, wait, saveFolder);
+			//
+			//			//サービスから福利厚生
+			//			welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			welfareCheck.captureFromService(driver, wait, saveFolder);
+			//
+			//			//サービスに戻る
+			//			serviceCeck.backToService(driver, wait, saveFolder);
+			//
+			//			//サービスから教育・研修
+			//			trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			trainingCheck.captureFromService(driver, wait, saveFolder);
+			//
+			//			//サービスに戻る
+			//			serviceCeck.backToService(driver, wait, saveFolder);
+			//
+			//			//サービスから社員の声
+			//			voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			voicesCheck.captureFromService(driver, wait, saveFolder);
+			//
+			//			//サービスに戻る
+			//			serviceCeck.backToService(driver, wait, saveFolder);
+			//
+			//
+			//			//サービスからエントリー
+			//			entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			//			entryCheck.captureFromService(driver, wait, saveFolder);
+			//
+			//			//サービスに戻る
+			//			serviceCeck.backToService(driver, wait, saveFolder);
+//
+//			//サービスからお問合せ
+//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			contactCheck.captureFromServuce(driver, wait, saveFolder);
+//
+//			//サービスに戻る
+//			serviceCheck.backToService(driver, wait, saveFolder);
+//
+//			//トップページに戻る
+//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+//			//サービスについてここまで
+
+
+			//募集一覧についてここから
+			//トップページから募集一覧へとぶ
+			jobcategoryCheck.toJobcategory(driver, wait, saveFolder);
+
+			//募集一覧からトップページ
+			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			topCheck.captureFromJobcategory(driver, wait, saveFolder);
+
+			//トップページから募集一覧に戻る(トップページから理念へとぶ)
+			jobcategoryCheck.toJobcategory(driver, wait, saveFolder);
+
+			//募集一覧から会社概要
+			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			companyCheck.captureFromJobcategory(driver, wait, saveFolder);
+
+			//募集一覧に戻る
+			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+
+			//募集一覧から理念
+			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			philosophyCheck.captureFromJobcategory(driver, wait, saveFolder);
+
+			//募集一覧に戻る
+			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+
+			//募集一覧からパートナーシナジー
+			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			partnersynergyCheck.captureFromJobcategory(driver, wait, saveFolder);
+
+			//募集一覧に戻る
+			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+
+			//募集一覧からサービス
+			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+			serviceCheck.captureFromJobcategory(driver, wait, saveFolder);
+
+			//募集一覧に戻る
+			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+
+//			//サービスから募集一覧
+//			jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			jobcategoryCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//募集一覧に戻る
+//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+//
+//			//募集一覧から福利厚生
+//			welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			welfareCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//募集一覧に戻る
+//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+//
+//			//募集一覧から教育・研修
+//			trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			trainingCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//募集一覧に戻る
+//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+//
+//			//募集一覧から社員の声
+//			voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			voicesCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//募集一覧に戻る
+//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+//
+//
+//			//募集一覧からエントリー
+//			entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			entryCheck.captureFromService(driver, wait, saveFolder);
+//
+//			//募集一覧に戻る
+//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+//
+//			//募集一覧からお問合せ
+//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
+//			contactCheck.captureFromServuce(driver, wait, saveFolder);
+//
+//			//募集一覧に戻る
+//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
+//
+//			//トップページに戻る
+//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+//			//募集一覧についてここまで
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			//終了のためしばらく待って
 			Thread.sleep(500); // Let the user actually see something!
 
 			//chrome終了
 			driver.quit();
 
-			System.out.println("chrone終了");
-
-			//終了メッセージ
 			JOptionPane pane = new JOptionPane("処理が終了しました。", JOptionPane.INFORMATION_MESSAGE);
-			JDialog dialog = pane.createDialog(null, "seleniumHokushinChrome");
+			JDialog dialog = pane.createDialog(null, "seleniumHokushinHp");
 			dialog.setAlwaysOnTop(true);
 			dialog.setVisible(true);
 			System.out.println("*** 終了メッセージ表示終了");
@@ -1670,6 +711,11 @@ public class SeleniumHokushinHPChrome {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+	}
+
+	private static CompanyCheck CompanyCheck() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }
