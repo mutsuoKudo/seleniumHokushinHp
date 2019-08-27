@@ -12,15 +12,41 @@ public class ServiceCheck {
 
 	protected void clickAndCaptureFromHome(WebDriver driver, WebDriverWait wait, String saveFolder) throws IOException, InterruptedException {
 		//サービス
-		//クリック対象要素が表示されるまで待つ
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
 
-		//クリック
-		driver.findElement(
-				By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
-				.click();
+		//ウィンドウサイズ確認
+				int windowWidth = driver.manage().window().getSize().getWidth();
+
+		//ホーム画面のメニュー選択
+		if (windowWidth < (768 + 16)) {
+			//クリック対象要素が表示されるまで待つ（ハンバーガーメニュー）
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector(
+							"body > div.hs-base-container > nav > div.w-100 > button")));
+
+			//クリック（ハンバーガーメニュー）
+			driver.findElement(
+					By.cssSelector("body > div.hs-base-container > nav > div.w-100 > button"))
+					.click();
+
+			//クリック対象要素が表示されるまで待つ（ハンバーガーメニュー第一レベル）
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector("#Navbar > ul > li:nth-child(3) > a")));
+
+			//クリック（ハンバーガーメニュー第一レベル）
+			driver.findElement(
+					By.cssSelector("#Navbar > ul > li:nth-child(3) > a")).click();
+		}else {
+			//通常メニュー
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector(
+							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
+
+			//クリック
+			driver.findElement(
+					By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
+					.click();
+		}
 
 		//クリック対象要素が表示されるまで待つ
 		wait.until(ExpectedConditions

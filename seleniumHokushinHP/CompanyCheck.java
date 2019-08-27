@@ -13,42 +13,84 @@ public class CompanyCheck {
 	protected void clickAndCaptureFromHome(WebDriver driver, WebDriverWait wait, String saveFolder, String saimoku)
 			throws IOException, InterruptedException {
 
-		//CSSSelector格納用
-		String cssSelector = null;
+		//CSSSelector格納用(サブメニュー）
+		String cssSelectorSub = null;
+
+		//ウィンドウサイズ確認
+		int windowWidth = driver.manage().window().getSize().getWidth();
 
 		//細目によるCSSSelectorの切り替え
-		switch (saimoku) {
-		case "会社概要":
-			cssSelector = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a";
-			break;
-		case "理念":
-			cssSelector = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a";
-			break;
-		case "パートナーシナジー":
-			cssSelector = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(3) > a";
-			break;
-		default:
-			System.out.println("エラー：企業情報に存在しない細目を処理しようとしました。");
-			return;
+		if (windowWidth < (768 + 16)) {
+			switch (saimoku) {
+			case "会社概要":
+				cssSelectorSub = "#Navbar > ul > li.nav-item.mt-2.mb-2.show > ul > li:nth-child(1) > a";
+				break;
+			case "理念":
+				cssSelectorSub = "#Navbar > ul > li.nav-item.mt-2.mb-2.show > ul > li:nth-child(2) > a";
+				break;
+			case "パートナーシナジー":
+				cssSelectorSub = "#Navbar > ul > li.nav-item.mt-2.mb-2.show > ul > li:nth-child(3) > a";
+				break;
+			default:
+				System.out.println("エラー：企業情報に存在しない細目を処理しようとしました。");
+				return;
+			}
+		} else {
+			switch (saimoku) {
+			case "会社概要":
+				cssSelectorSub = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a";
+				break;
+			case "理念":
+				cssSelectorSub = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a";
+				break;
+			case "パートナーシナジー":
+				cssSelectorSub = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(3) > a";
+				break;
+			default:
+				System.out.println("エラー：企業情報に存在しない細目を処理しようとしました。");
+				return;
+			}
 		}
 
+		//ホーム画面のメニュー選択
+		if (windowWidth < (768 + 16)) {
+			//クリック対象要素が表示されるまで待つ（ハンバーガーメニュー）
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector(
+							"body > div.hs-base-container > nav > div.w-100 > button")));
+
+			//クリック（ハンバーガーメニュー）
+			driver.findElement(
+					By.cssSelector("body > div.hs-base-container > nav > div.w-100 > button"))
+					.click();
+
+			//クリック対象要素が表示されるまで待つ（ハンバーガーメニュー第一レベル）
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector("#dropdownMenuButtonCompany")));
+
+			//クリック（ハンバーガーメニュー第一レベル）
+			driver.findElement(
+					By.cssSelector("#dropdownMenuButtonCompany")).click();
+		} else {
+			//通常メニュー
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector(
+							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
+
+			//クリック
+			driver.findElement(
+					By.cssSelector(
+							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
+					.click();
+		}
+
+		//メニュー細目
 		//クリック対象要素が表示されるまで待つ
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelectorSub)));
 
 		//クリック
-		driver.findElement(
-				By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-				.click();
-
-		//クリック対象要素が表示されるまで待つ
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(cssSelector)));
-
-		//クリック
-		driver.findElement(By.cssSelector(cssSelector))
-				.click();
+		driver.findElement(By.cssSelector(cssSelectorSub)).click();
 
 		//クリック対象要素が表示されるまで待つ
 		wait.until(ExpectedConditions
@@ -74,5 +116,64 @@ public class CompanyCheck {
 		//キャプチャー
 		captureUtil.cupturePage(driver, saveFolder, saimoku + "スクロール後");
 
+		//理念の場合のみ
+		if (saimoku == "理念") {
+//			//デフォルトのwindowHandleを格納
+//			String mainWindowHandle = driver.getWindowHandle();
+//
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)")));
+
+			//クリック
+			driver.findElement(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)")).click();
+			//しばらく待って
+			Thread.sleep(1000);
+			//キャプチャ
+			captureUtil.cupturePage(driver, saveFolder, "ぷろくま");
+
+			driver.navigate().refresh();
+//
+//			//デフォルトのwindowHandleにスイッチ
+//			driver.switchTo().window(mainWindowHandle);
+
+//			act.sendKeys(Keys.ESCAPE);
+//			act.perform();
+
+;
+
+//			//クリック対象要素が表示されるまで待つ
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#purokuma-modal")));
+//			//クリック
+//			driver.findElement(By.cssSelector("#purokuma-modal")).click();
+
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#home-pol > a:nth-child(1)")));
+
+			//クリック
+			driver.findElement(By.cssSelector("#home-pol > a:nth-child(1)")).click();
+
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
+
+			//キャプチャ
+			captureUtil.cupturePage(driver, saveFolder, "セキュリティポリシー");
+
+			//戻る
+			driver.navigate().back();
+
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#home-pol > a:nth-child(2"
+					+ ")")));
+
+			//クリック
+			driver.findElement(By.cssSelector("#home-pol > a:nth-child(2)")).click();
+
+			//クリック対象要素が表示されるまで待つ
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
+
+			//キャプチャ
+			captureUtil.cupturePage(driver, saveFolder, "プライバシーポリシー");
+
+		}
 	}
 }
