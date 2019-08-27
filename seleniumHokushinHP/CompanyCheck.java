@@ -118,42 +118,48 @@ public class CompanyCheck {
 
 		//理念の場合のみ
 		if (saimoku == "理念") {
-//			//デフォルトのwindowHandleを格納
-//			String mainWindowHandle = driver.getWindowHandle();
-//
+			//			//デフォルトのwindowHandleを格納
+			//			String mainWindowHandle = driver.getWindowHandle();
+			//
 			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)")));
 
 			//クリック
-			driver.findElement(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)")).click();
+			driver.findElement(By.cssSelector(
+					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)"))
+					.click();
 			//しばらく待って
 			Thread.sleep(1000);
 			//キャプチャ
 			captureUtil.cupturePage(driver, saveFolder, "ぷろくま");
 
 			driver.navigate().refresh();
-//
-//			//デフォルトのwindowHandleにスイッチ
-//			driver.switchTo().window(mainWindowHandle);
+			//
+			//			//デフォルトのwindowHandleにスイッチ
+			//			driver.switchTo().window(mainWindowHandle);
 
-//			act.sendKeys(Keys.ESCAPE);
-//			act.perform();
+			//			act.sendKeys(Keys.ESCAPE);
+			//			act.perform();
 
-;
+			;
 
-//			//クリック対象要素が表示されるまで待つ
-//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#purokuma-modal")));
-//			//クリック
-//			driver.findElement(By.cssSelector("#purokuma-modal")).click();
+			//			//クリック対象要素が表示されるまで待つ
+			//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#purokuma-modal")));
+			//			//クリック
+			//			driver.findElement(By.cssSelector("#purokuma-modal")).click();
 
-			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#home-pol > a:nth-child(1)")));
+			//セキュリティポリシーまで画面を移動
+			act.moveToElement(driver.findElement(
+					By.cssSelector("#home-pol > a:nth-child(1)")));
+			act.perform();
 
 			//クリック
 			driver.findElement(By.cssSelector("#home-pol > a:nth-child(1)")).click();
 
 			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
 
 			//キャプチャ
 			captureUtil.cupturePage(driver, saveFolder, "セキュリティポリシー");
@@ -169,7 +175,8 @@ public class CompanyCheck {
 			driver.findElement(By.cssSelector("#home-pol > a:nth-child(2)")).click();
 
 			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
 
 			//キャプチャ
 			captureUtil.cupturePage(driver, saveFolder, "プライバシーポリシー");

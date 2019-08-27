@@ -43,8 +43,8 @@ public class SeleniumHokushinHPChrome {
 		//		driver.manage().window().maximize();
 
 		// 指定のウィンドウサイズに変更
-		int width = 1200 + 15;
-		int height = 800;
+		int width = 992 + 15;
+		int height = 720;
 		driver.manage().window().setSize(new Dimension(width, height));
 
 		//driverはchromeがはいっている→https://ae1036569i.smartrelease.jpに遷移しろというている
