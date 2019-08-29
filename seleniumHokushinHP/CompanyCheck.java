@@ -60,30 +60,8 @@ public class CompanyCheck {
 		act.perform();
 
 		//企業概要キャプチャースクロール後
-				waitAndCapture(driver, wait, "#privacymark-logo", "トップページから会社概要スクロール後", saveFolder);
+		waitAndCapture(driver, wait, "#privacymark-logo", "トップページから会社概要スクロール後", saveFolder);
 
-
-		//		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-		//		wait.until(ExpectedConditions
-		//				.visibilityOfElementLocated(By.cssSelector(
-		//						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
-		//
-		//		//クリック(ナビゲーションバーの企業情報)
-		//		driver.findElement(By
-		//				.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-		//				.click();
-		//		System.out.println("企業情報クリック");
-
-		//		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-		//		wait.until(ExpectedConditions
-		//				.visibilityOfElementLocated(By.cssSelector(
-		//						"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a")));
-		//
-		//		//クリック(ナビゲーションバーの会社概要)
-		//		driver.findElement(By.cssSelector(
-		//				"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a"))
-		//				.click();
-		//		System.out.println("会社概要クリック");
 	}
 
 	//会社概要→理念→キャプチャー
@@ -95,7 +73,7 @@ public class CompanyCheck {
 		//ウィンドウサイズ確認
 		int windowWidth = driver.manage().window().getSize().getWidth();
 
-		if (windowWidth < (768 + 16)) {
+		if (windowWidth < (992 + 16)) {
 
 			System.out.println("ハンバーガーメニュー");
 
@@ -152,11 +130,8 @@ public class CompanyCheck {
 				By.cssSelector("#home-pol > a:nth-child(1)")));
 		act.perform();
 
-		//クリック
-		driver.findElement(By.cssSelector("#home-pol > a:nth-child(1)")).click();
-
 		//クリック対象要素が表示されるまで待つ→クリックセキュリティポリシー
-		waitAndClick(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "セキュリティポリシー");
+		waitAndClick(driver, wait, "#home-pol > a:nth-child(1)", "セキュリティポリシー");
 
 		//セキュリティポリシーキャプチャー
 		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "セキュリティポリシー", saveFolder);
