@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.OutputType;
@@ -19,8 +18,8 @@ public class CaptureUtil {
 		File sfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 		//コピー先の指定→ファイル名に時刻付加
-		LocalDateTime nowLocalDt = LocalDateTime.now();
-		String localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(nowLocalDt);
+//		LocalDateTime nowLocalDt = LocalDateTime.now();
+		String localTimeStr1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss.SSS").format(SeleniumHokushinHPChrome.nowLocalDt);
 		String destFileName = saveFolder + localTimeStr1 + gamenName + "画面.png";
 		System.out.println("ファイル名" + destFileName);
 

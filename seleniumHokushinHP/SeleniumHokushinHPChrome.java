@@ -6,13 +6,19 @@ import java.time.LocalDateTime;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumHokushinHPChrome {
+
+	//現在時刻格納用
+		public static LocalDateTime nowLocalDt = LocalDateTime.now();;
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -33,27 +39,41 @@ public class SeleniumHokushinHPChrome {
 
 		Actions act = new Actions(driver);
 
-		//現在時刻格納用
-		LocalDateTime nowLocalDt = null;
-		//現在時刻の文字列化用
-		String localTimeStr1 = null;
 		//スクリーンショット保存フォルダ+ファイル名共通部
 		String saveFolder = "./screenShots/";
 
 		//カレントウインドウを最大化する
-		driver.manage().window().maximize();
+//		driver.manage().window().maximize();
 
-		//driverはchromeがはいっている→index.phpに遷移しろというている
-		//        driver.get("http://192.168.71.208/hokushin_util/index.php");
+		// 指定のウィンドウサイズに変更
+		int width = 1200 + 15;
+		int height = 1000;
+		driver.manage().window().setSize(new Dimension(width, height));
+
+		//driverはchromeがはいっている
 		driver.get("https://ae1036569i.smartrelease.jp/");
 
 		try {
-			//カレントウインドウを最大化する
-			driver.manage().window().maximize();
+
 			//ちょっとだけ待つ
 			Thread.sleep(10);// Let the user actually see something!!
+
 			TopCheck topCheck = new TopCheck();
+
+			//企業情報チェック用インスタンス作成
 			CompanyCheck companyCheck = new CompanyCheck();
+
+			//企業情報チェック実行
+			//ホームから会社概要へ→キャプチャー
+			companyCheck.toCompany(driver, wait, saveFolder);
+
+			//会社概要から理念へ→キャプチャー
+			companyCheck.companyToPhilosophy(driver, wait, saveFolder) ;
+
+//			//ホームに戻る
+//			//クリック
+			backHomeFromChild(driver, wait);
+
 			PhilosophyCheck philosophyCheck = new PhilosophyCheck();
 			PartnersynergyCheck partnersynergyCheck = new PartnersynergyCheck();
 			ServiceCheck serviceCheck = new ServiceCheck();
@@ -716,6 +736,29 @@ public class SeleniumHokushinHPChrome {
 	private static CompanyCheck CompanyCheck() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
+	}
+
+	protected static void backHomeFromChild(WebDriver driver, WebDriverWait wait) {
+		//ウィンドウサイズ確認
+		int windowWidth = driver.manage().window().getSize().getWidth();
+		//クリック
+		if (windowWidth < (992 + 16)) {
+			//（ハンバーガーメニュー）
+			driver.findElement(
+					By.cssSelector("body > header > nav > div.w-100 > button > span"))
+					.click();
+
+			//クリック対象要素が表示されるまで待つ（ハンバーガー→ホーム）
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector(
+							"#Navbar > ul > li.nav-item.mt-4.mb-2 > a")));
+			//クリック
+			driver.findElement(By.cssSelector("#Navbar > ul > li.nav-item.mt-4.mb-2 > a")).click();
+		} else {
+			//通常メニュー
+			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+		}
+
 	}
 
 }
