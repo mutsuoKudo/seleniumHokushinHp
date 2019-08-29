@@ -123,11 +123,11 @@ public class CompanyCheck {
 			//
 			//クリック対象要素が表示されるまで待つ
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
-					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)")));
+					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)")));
 
 			//クリック
 			driver.findElement(By.cssSelector(
-					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(5)"))
+					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)"))
 					.click();
 			//しばらく待って
 			Thread.sleep(1000);
