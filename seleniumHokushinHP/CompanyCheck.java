@@ -15,7 +15,7 @@ public class CompanyCheck {
 			throws IOException, InterruptedException {
 
 		//画面をスクロールさせるためActionクラスのインスタンスを作成
-				Actions act = new Actions(driver);
+		Actions act = new Actions(driver);
 
 		//ウィンドウサイズ確認
 		int windowWidth = driver.manage().window().getSize().getWidth();
@@ -52,7 +52,8 @@ public class CompanyCheck {
 		}
 
 		//企業概要キャプチャー
-		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "トップページから会社概要", saveFolder);
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "トップページから会社概要",
+				saveFolder);
 
 		//フッターのロゴまで画面を移動
 		act.moveToElement(driver.findElement(
@@ -65,7 +66,8 @@ public class CompanyCheck {
 	}
 
 	//会社概要→理念→キャプチャー
-	public void companyToPhilosophy(WebDriver driver, WebDriverWait wait, String saveFolder) throws IOException, InterruptedException {
+	public void companyToPhilosophy(WebDriver driver, WebDriverWait wait, String saveFolder)
+			throws IOException, InterruptedException {
 
 		//画面をスクロールさせるためActionクラスのインスタンスを作成
 		Actions act = new Actions(driver);
@@ -78,10 +80,11 @@ public class CompanyCheck {
 			System.out.println("ハンバーガーメニュー");
 
 			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー）
-			waitAndClick(driver, wait, "body > div.hs-base-container > nav > div.w-100 > button", "ハンバーガーメニュー");
+			waitAndClick(driver, wait, "body > header > nav > div.w-100 > button", "ハンバーガーメニュー");
 
 			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第一レベル）
 			waitAndClick(driver, wait, "#dropdownMenuButtonCompany", "メニュー企業情報");
+
 
 			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第二レベル）
 			waitAndClick(driver, wait, "#Navbar > ul > li.nav-item.mt-2.mb-2.show > ul > li:nth-child(2) > a",
@@ -101,7 +104,8 @@ public class CompanyCheck {
 		}
 
 		//理念キャプチャー
-		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "会社概要から理念", saveFolder);
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "会社概要から理念",
+				saveFolder);
 
 		//フッターのロゴまで画面を移動
 		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
@@ -112,7 +116,8 @@ public class CompanyCheck {
 
 		//理念追加処理
 		//クリック対象要素が表示されるまで待つ→クリックぷろくま
-		waitAndClick(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)", "ぷろくま");
+		waitAndClick(driver, wait,
+				"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(8)","ぷろくま");
 
 		//しばらく待って
 		Thread.sleep(1000);
@@ -134,242 +139,155 @@ public class CompanyCheck {
 		waitAndClick(driver, wait, "#home-pol > a:nth-child(1)", "セキュリティポリシー");
 
 		//セキュリティポリシーキャプチャー
-		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "セキュリティポリシー", saveFolder);
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "セキュリティポリシー",
+				saveFolder);
 
 		//戻る
 		driver.navigate().back();
 
 		//クリック対象要素が表示されるまで待つ→プライバシーポリシー
-				waitAndClick(driver, wait, "#home-pol > a:nth-child(2)", "プライバシーポリシー");
+		waitAndClick(driver, wait, "#home-pol > a:nth-child(2)", "プライバシーポリシー");
 
 		//プライバシーポリシーキャプチャー
-		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "プライバシーポリシー", saveFolder);
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "プライバシーポリシー",
+				saveFolder);
+
+		//戻る
+		driver.navigate().back();
 
 	}
 
 
-	//会社概要へ戻る
-	public void backToCompany(WebDriver driver, WebDriverWait wait, String saveFolder) {
-		// TODO 自動生成されたメソッド・スタブ
+	//理念→パートナーシナジー→キャプチャー
+	public void philosophyToPartnerSynergy(WebDriver driver, WebDriverWait wait, String saveFolder) throws IOException, InterruptedException {
 
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"#navbarDropdownCompany > span")));
-
-		//クリック(ナビゲーションバーの企業情報)
-		driver.findElement(By
-				.cssSelector("#navbarDropdownCompany > span"))
-				.click();
-		System.out.println("企業情報クリック");
-
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-		//クリック(ナビゲーションバーの会社概要)
-		driver.findElement(By.cssSelector(
-				"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-				.click();
-		System.out.println("会社概要クリック");
-	}
-
-	//トップからのアクセス
-	protected void clickAndCaptureFromHome(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span")));
-
-		//クリック(ナビゲーションバーの企業情報)
-		driver.findElement(By
-				.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(2) > a > span"))
-				.click();
-		System.out.println("企業情報クリック");
-
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a")));
-
-		//クリック(ナビゲーションバーの会社概要)
-		driver.findElement(By.cssSelector(
-				"body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a"))
-				.click();
-		System.out.println("会社概要クリック");
-
-		//クリック対象要素が表示されるまで待つ（Companyタイトル）
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(
-						By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "トップページから会社概要");
-
+		//画面をスクロールさせるためActionクラスのインスタンスを作成
 		Actions act = new Actions(driver);
 
-		//スクロールさせる
+		//ウィンドウサイズ確認
+		int windowWidth = driver.manage().window().getSize().getWidth();
+
+		if (windowWidth < (992 + 16)) {
+
+			System.out.println("ハンバーガーメニュー");
+
+			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー）
+			waitAndClick(driver, wait, "body > header > nav > div.w-100 > button", "ハンバーガーメニュー");
+
+			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第一レベル）
+			waitAndClick(driver, wait, "#dropdownMenuButtonCompany", "メニュー企業情報");
+
+			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第二レベル）
+			waitAndClick(driver, wait, "#Navbar > ul > li.nav-item.mt-2.mb-2.show > ul > li:nth-child(3) > a",
+					"メニューパートナーシナジー");
+
+		} else {
+
+			//通常メニュー
+			System.out.println("通常メニュー");
+
+			//クリック対象要素が表示されるまで待つ→クリック（通常メニュー第一レベル）
+			waitAndClick(driver, wait, "#navbarDropdownCompany > span", "メニュー企業情報");
+
+			//クリック対象要素が表示されるまで待つ→クリック（通常メニュー第二レベル）
+			waitAndClick(driver, wait, "#menu-item-22 > div > a:nth-child(3)", "メニューパートナーシナジー");
+
+		}
+
+		//パートナーシナジーキャプチャー
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "理念からパートナーシナジー",
+				saveFolder);
+
+		//フッターのロゴまで画面を移動
 		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
 		act.perform();
 
-		//しばらく待って
-		Thread.sleep(1000);
+		//パートナーシナジーキャプチャースクロール後
+		waitAndCapture(driver, wait, "#privacymark-logo", "理念からパートナーシナジースクロール後", saveFolder);
 
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "トップページから会社概要スクロール後");
 
-	}
-
-	//会社概要・理念からのアクセス
-	public void clickAndCaptureFromOther(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの企業情報)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"#navbarDropdownCompany > span")));
-
-		//クリック(ナビゲーションバーの企業情報)
-		driver.findElement(By
-				.cssSelector("#navbarDropdownCompany > span"))
-				.click();
-		System.out.println("企業情報クリック");
-
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーの会社概要)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0")));
-
-		//クリック(ナビゲーションバーの会社概要)
-		driver.findElement(By.cssSelector(
-				"#menu-item-22 > div > a.dropdown-item.hs-dropdown-item.mt-0"))
-				.click();
-		System.out.println("会社概要クリック");
-
-		//クリック対象要素が表示されるまで待つ（Companyタイトル）
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(
-						By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-	}
-
-	//	会社概要からのアクセスキャプチャー
-	protected void captureFromCompany(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "会社概要から会社概要");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "会社概要から会社概要スクロール後");
-
-	}
-
-	//	理念からのアクセスキャプチャー
-	protected void captureFromPhilosophy(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "理念から会社概要");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "理念から会社概要スクロール後");
-
-	}
-
-	//	パートナーシナジーからのアクセスキャプチャー
-	public void captureFromPartnersynergy(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーから会社概要");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーから会社概要スクロール後");
+//		//パートナーシナジー追加処理
+//
+//		//中小企業協同組合とは？まで画面を移動
+//		act.moveToElement(driver.findElement(By.cssSelector("#ICT01 > article > map > area:nth-child(1)")));
+//		act.perform();
+//
+//		System.out.println("中小企業協同組合とは？まで画面を移動");
+//
+//				//クリック対象要素が表示されるまで待つ→クリックホクシンシステム企業ロゴ
+//				waitAndClick(driver, wait,
+//						"#ICT01 > article > map > area:nth-child(1)","ﾎｸｼﾝｼｽﾃﾑ企業ロゴ");
+//
+//				//しばらく待って
+//				Thread.sleep(1000);
+//
+//				//キャプチャー準備
+//				CaptureUtil captureUtil = new CaptureUtil();
+//
+//				//キャプチャ
+//				captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーマップ（ﾎｸｼﾝｼｽﾃﾑ）");
+//
+//				//別タブで開いて戻れないので、パートナーシナジーに飛ぶ。
+//				driver.navigate().to("https://ae1036569i.smartrelease.jp/partner-synergy");
+//
+//
+//				//クリック対象要素が表示されるまで待つ→クリックjicoo企業ロゴ
+//				waitAndClick(driver, wait,
+//						"#ICT01 > article > map > area:nth-child(2)","jicoo企業ロゴ");
+//
+//				//しばらく待って
+//				Thread.sleep(1000);
+//
+//				//キャプチャ
+//				captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーマップ（jicoo）");
+//
+//				//別タブで開いて戻れないので、パートナーシナジーに飛ぶ。
+//				driver.navigate().to("https://ae1036569i.smartrelease.jp/partner-synergy");
+//
+//
+//				//クリック対象要素が表示されるまで待つ→クリックIBS企業ロゴ
+//				waitAndClick(driver, wait,
+//						"#ICT01 > article > map > area:nth-child(3)","IBS企業ロゴ");
+//
+//				//しばらく待って
+//				Thread.sleep(1000);
+//
+//				//キャプチャ
+//				captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーマップ（IBS）");
+//
+//				//別タブで開いて戻れないので、パートナーシナジーに飛ぶ。
+//				driver.navigate().to("https://ae1036569i.smartrelease.jp/partner-synergy");
+//
+//
+//				//クリック対象要素が表示されるまで待つ→クリック横浜ﾏﾘﾝｼｽﾃﾑ企業ロゴ
+//				waitAndClick(driver, wait,
+//						"#ICT01 > article > map > area:nth-child(4)","横浜ﾏﾘﾝｼｽﾃﾑ企業ロゴ");
+//
+//				//しばらく待って
+//				Thread.sleep(1000);
+//
+//				//キャプチャ
+//				captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーマップ（ｼｰｻｰﾈｯﾄ）");
+//
+//				//別タブで開いて戻れないので、パートナーシナジーに飛ぶ。
+//				driver.navigate().to("https://ae1036569i.smartrelease.jp/partner-synergy");
+//
+//
+//				//クリック対象要素が表示されるまで待つ→クリック横浜ﾏﾘﾝｼｽﾃﾑ企業ロゴ
+//				waitAndClick(driver, wait,
+//						"#ICT01 > article > map > area:nth-child(4)","ｼｰｻｰﾈｯﾄ企業ロゴ");
+//
+//				//しばらく待って
+//				Thread.sleep(1000);
+//
+//				//キャプチャ
+//				captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーマップ（横浜ｼｰｻｰﾈｯﾄ）");
+//
+//				//別タブで開いて戻れないので、パートナーシナジーに飛ぶ。
+//				driver.navigate().to("https://ae1036569i.smartrelease.jp/partner-synergy");
 
 	}
 
-	//	サービスからのアクセスキャプチャー
-	public void captureFromService(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "サービスから会社概要");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "サービスから会社概要スクロール後");
-
-	}
-
-	//	募集一覧からのアクセスキャプチャー
-	public void captureFromJobcategory(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "募集一覧から会社概要");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "募集一覧から会社概要スクロール後");
-	}
 
 	protected void waitAndClick(WebDriver driver, WebDriverWait wait, String cssSelector, String targetName) {
 
@@ -395,4 +313,6 @@ public class CompanyCheck {
 		//キャプチャー
 		captureUtil.cupturePage(driver, saveFolder, targetName);
 	}
+
+
 }
