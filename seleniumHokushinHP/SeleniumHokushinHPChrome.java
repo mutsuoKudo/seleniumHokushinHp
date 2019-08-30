@@ -46,19 +46,25 @@ public class SeleniumHokushinHPChrome {
 //		driver.manage().window().maximize();
 
 		// 指定のウィンドウサイズに変更
-		int width = 1200 + 15;
+//		int width = 1200 + 15;
+		int width = 768 + 15;
+		// 梅アイコン表示させるウィンドウサイズ
+//		int width = 1201 + 15;
 		int height = 1000;
 		driver.manage().window().setSize(new Dimension(width, height));
 
 		//driverはchromeがはいっている
-		driver.get("https://ae1036569i.smartrelease.jp/");
+		driver.get("http://hokusys.jp/");
 
 		try {
 
 			//ちょっとだけ待つ
 			Thread.sleep(10);// Let the user actually see something!!
 
+
+			//ホームチェック用インスタンス作成
 			TopCheck topCheck = new TopCheck();
+			topCheck.toTop(driver, wait, saveFolder);
 
 			//企業情報チェック用インスタンス作成
 			CompanyCheck companyCheck = new CompanyCheck();
@@ -70,608 +76,165 @@ public class SeleniumHokushinHPChrome {
 			//会社概要から理念へ→キャプチャー
 			companyCheck.companyToPhilosophy(driver, wait, saveFolder) ;
 
-//			//ホームに戻る
-//			//クリック
-			backHomeFromChild(driver, wait);
+			//理念からパートナーシナジーへ→キャプチャー
+			companyCheck.philosophyToPartnerSynergy(driver, wait, saveFolder) ;
 
-			PhilosophyCheck philosophyCheck = new PhilosophyCheck();
-			PartnersynergyCheck partnersynergyCheck = new PartnersynergyCheck();
+
+			//サービスチェック用インスタンス作成
 			ServiceCheck serviceCheck = new ServiceCheck();
+
+			//サービスチェック実行
+			//パートナーシナジーからサービスへ→キャプチャー
+			serviceCheck.partnerSynergyToService(driver, wait, saveFolder);
+
+			//採用情報チェック用インスタンス作成
 			JobcategoryCheck jobcategoryCheck = new JobcategoryCheck();
-			WelfareCheck welfareCheck = new WelfareCheck();
-			TrainingCheck trainingCheck = new TrainingCheck();
-			VoicesCheck voicesCheck = new VoicesCheck();
-			EntryCheck entryCheck = new EntryCheck();
+
+			//採用情報チェック実行
+			//サービスから募集一覧へ→キャプチャー
+			jobcategoryCheck.serviceToJobcategory(driver, wait, saveFolder);
+
+			//募集一覧からエントリーへ→キャプチャー
+			jobcategoryCheck.jobcategoryToEntry(driver, wait, saveFolder);
+
+			//募集一覧から未経験者PHPへ→キャプチャー
+			jobcategoryCheck.jobcategoryToNewPHP(driver, wait, saveFolder);
+
+			//未経験者PHPからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.newPHPToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から未経験者Javaへ→キャプチャー
+			jobcategoryCheck.jobcategoryToNewJava(driver, wait, saveFolder);
+
+			//未経験者Javaからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.newJavaToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から未経験者C言語Linuxへ→キャプチャー
+			jobcategoryCheck.jobcategoryToNewCLinux(driver, wait, saveFolder);
+
+			//未経験者C言語Linuxからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.newCLinuxToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から経験者PHPへ→キャプチャー
+			jobcategoryCheck.jobcategoryToExPHP(driver, wait, saveFolder);
+
+			//経験者PHPからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.exPHPToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から経験者Javaへ→キャプチャー
+			jobcategoryCheck.jobcategoryToExJava(driver, wait, saveFolder);
+
+			//経験者Javaからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.exJavaToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から経験者C言語Linuxへ→キャプチャー
+			jobcategoryCheck.jobcategoryToExCLinux(driver, wait, saveFolder);
+
+			//経験者C言語Linuxからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.exCLinuxToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から経験者C++C#へ→キャプチャー
+			jobcategoryCheck.jobcategoryToExC(driver, wait, saveFolder);
+
+			//経験者C言語Linuxからエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.exCToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から経験者ネットワーク管理へ→キャプチャー
+			jobcategoryCheck.jobcategoryToExNetwork(driver, wait, saveFolder);
+
+			//経験者ネットワーク管理からエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.exNetworkToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から経験者営業へ→キャプチャー
+			jobcategoryCheck.jobcategoryToExManagement(driver, wait, saveFolder);
+
+			//経験者営業からエントリー（上下のボタン）へ→キャプチャー
+			jobcategoryCheck.exManagementToEntry(driver, wait, saveFolder) ;
+
+			//募集一覧から福利厚生へ→キャプチャー
+			jobcategoryCheck.jobcategoryToWelfare(driver, wait, saveFolder);
+
+			//福利厚生からエントリーへ→キャプチャー
+			jobcategoryCheck.welfareToEntry(driver, wait, saveFolder);
+
+			//福利厚生から教育・研修へ→キャプチャー
+			jobcategoryCheck.welfareToTraining(driver, wait, saveFolder);
+
+			//教育・研修からエントリーへ→キャプチャー
+			jobcategoryCheck.trainingToEntry(driver, wait, saveFolder);
+
+			//教育・研修から社員の声へ→キャプチャー
+			jobcategoryCheck.trainingToVoices(driver, wait, saveFolder);
+
+			//社員の声からモーダル→キャプチャー
+			jobcategoryCheck.voicesToModal(driver, wait, saveFolder);
+
+			//社員の声からエントリーへ→キャプチャー
+			jobcategoryCheck.voicesToEntry(driver, wait, saveFolder);
+
+
+			//お問合せ用インスタンス作成
 			ContactCheck contactCheck = new ContactCheck();
 
-			//トップページについてここから
-			//	//トップページのナビゲーションバーここから
+			//お問合せチェック実行
+			//ホームからお問合せへ→キャプチャー
+			contactCheck.entryToContact(driver, wait, saveFolder);
 
-			//						//トップページからトップページ
-			//						topCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページから会社概要
-			////						CompanyCheck companyCheck = new CompanyCheck();
-			//						companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページから理念
-			//						philosophyCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページからパートナーシナジー
-			//						partnersynergyCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページからサービス
-			//						ServiceCheck serviceCheck = new ServiceCheck();
-			//						serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+			//ホームに戻る
+			//クリック
+			backHomeFromChild(driver, wait);
 
-			//						//トップページから募集一覧
-			//						jobcategoryCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページから福利厚生
-			//						welfareCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページから教育・研修
-			//						trainingCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページから社員の声
-			//						voicesCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページからエントリー
-			//						entryCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページからお問合せ
-			//						contactCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページのナビゲーションバーここまで
-			//
-			//						//トップページの梅アイコンここから
-			//
-			//						//梅アイコン左から一番目
-			//						Plum1Check plum1Check = new Plum1Check();
-			//						plum1Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から二番目
-			//						Plum2Check plum2Check = new Plum2Check();
-			//						plum2Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から三番目
-			//						Plum3Check plum3Check = new Plum3Check();
-			//						plum3Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から四番目
-			//						Plum4Check plum4Check = new Plum4Check();
-			//						plum4Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から五番目
-			//						Plum5Check plum5Check = new Plum5Check();
-			//						plum5Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から六番目
-			//						Plum6Check plum6Check = new Plum6Check();
-			//						plum6Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から七番目
-			//						Plum7Check plum7Check = new Plum7Check();
-			//						plum7Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//梅アイコン左から八番目
-			//						Plum8Check plum8Check = new Plum8Check();
-			//						plum8Check.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページの梅アイコンここまで
-			//
-			//						//トップページヘッダーロゴここから
-			//
-			//						HeaderlogoCheck headerlogoCheck = new HeaderlogoCheck();
-			//						headerlogoCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			////						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページヘッダーロゴここまで
-			//
-			//						//トップページフッターここから
-			//						//トップページフッターロゴ
-			//
-			//						FooterlogoCheck footerlogoCheck = new FooterlogoCheck();
-			//						footerlogoCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
-			//
-			//						//トップページに戻る
-			//						driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-			//
-			//						//トップページフッターここまで
-			//						//トップページについてここまで
-//
-//			//会社概要についてここから
-//			//トップページから会社概要へとぶ
-//			companyCheck.toCompany(driver, wait, saveFolder);
-//
-//			//会社概要からトップページ
-//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			topCheck.captureFromCompany(driver, wait, saveFolder);
-//
-//			//トップページから会社概要に戻る(トップページから会社概要へとぶ)
-//			companyCheck.toCompany(driver, wait, saveFolder);
-//
-//			//会社概要から会社概要
-//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			companyCheck.captureFromCompany(driver, wait, saveFolder);
-//
-//			//会社概要に戻る
-//			companyCheck.backToCompany(driver, wait, saveFolder);
-//
-//			//会社概要から理念
-//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			philosophyCheck.captureFromCompany(driver, wait, saveFolder);
-//
-//			//会社概要に戻る
-//			companyCheck.backToCompany(driver, wait, saveFolder);
-//
-//			//会社概要からパートナーシナジー
-//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			partnersynergyCheck.captureFromCompany(driver, wait, saveFolder);
-//
-//			//会社概要に戻る
-//			companyCheck.backToCompany(driver, wait, saveFolder);
-//
-//			//会社概要からサービス
-//
-//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			serviceCheck.captureFromCompany(driver, wait, saveFolder);
-//
-//			//会社概要に戻る
-//			companyCheck.backToCompany(driver, wait, saveFolder);
-//
-			//						//会社概要から募集一覧
-			//						jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						jobcategoryCheck.captureFromCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要に戻る
-			//						companyCheck.backToCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要から福利厚生
-			//						welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						welfareCheck.captureFromCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要に戻る
-			//						companyCheck.backToCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要から教育・研修
-			//						trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						trainingCheck.captureFromCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要に戻る
-			//						companyCheck.backToCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要から社員の声
-			//						voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						voicesCheck.captureFromCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要に戻る
-			//						companyCheck.backToCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要からエントリー
-			//						entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						voicesCheck.captureFromCompany(driver, wait, saveFolder);
-			//
-			//						//会社概要に戻る
-			//						companyCheck.backToCompany(driver, wait, saveFolder);
-//
-//			//会社概要からお問合せ
-//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			contactCheck.captureFromCompany(driver, wait, saveFolder);
-//
-//			//会社概要に戻る
-//			companyCheck.backToCompany(driver, wait, saveFolder);
-//
-//			//トップページに戻る
-//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-//
-//			//会社概要についてここまで
-//
-//			//理念についてここから
-//			//トップページから理念へとぶ
-//			philosophyCheck.toPhilosophy(driver, wait, saveFolder);
-//
-//			//理念からトップページ
-//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			topCheck.captureFromPhilosophy(driver, wait, saveFolder);
-//
-//			//トップページから理念に戻る(トップページから理念へとぶ)
-//			philosophyCheck.toPhilosophy(driver, wait, saveFolder);
-//
-//			//理念から会社概要
-//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			companyCheck.captureFromPhilosophy(driver, wait, saveFolder);
-//
-//			//理念に戻る
-//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-//
-//			//理念から理念
-//			//			PhilosophyCheck philosophyCheck = new PhilosophyCheck();
-//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			philosophyCheck.captureFromPhilosophy(driver, wait, saveFolder);
-//
-//			//理念に戻る
-//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-//
-//			//理念からパートナーシナジー
-//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			partnersynergyCheck.captureFromPhilosophy(driver, wait, saveFolder);
-//
-//			//理念に戻る
-//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-//
-//			//理念からサービス
-//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			serviceCheck.captureFromPhilosophy(driver, wait, saveFolder);
-//
-//			//理念に戻る
-//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-//
-			//						//理念から募集一覧
-			//						jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						jobcategoryCheck.captureFromPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念に戻る
-			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念から福利厚生
-			//
-			//						welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						welfareCheck.captureFromPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念に戻る
-			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念から教育・研修
-			//						trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						trainingCheck.captureFromPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念に戻る
-			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念から社員の声
-			//						voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						voicesCheck.captureFromPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念に戻る
-			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念からエントリー
-			//						entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//						entryCheck.captureFromPhilosophy(driver, wait, saveFolder);
-			//
-			//						//理念に戻る
-			//						philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-//
-//			//理念からお問合せ
-//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			contactCheck.captureFromPhilosophy(driver, wait, saveFolder);
-//
-//			//理念に戻る
-//			philosophyCheck.backToPhilosophy(driver, wait, saveFolder);
-//
-//			//トップページに戻る
-//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-//
-//			//理念についてここまで
-//
-//			//パートナーシナジーについてここから
-//			//トップページからパートナーシナジーへとぶ
-//			partnersynergyCheck.toPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーからトップページ
-//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			topCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-//
-//			//トップページから理念に戻る(トップページから理念へとぶ)
-//			partnersynergyCheck.toPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーから会社概要
-//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			companyCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーに戻る
-//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーから理念
-//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			philosophyCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーに戻る
-//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーからパートナーシナジー
-//			//			PartnersynergyCheck partnersynergyCheck = new PartnersynergyCheck();
-//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			partnersynergyCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーに戻る
-//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーからサービス
-//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			serviceCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーに戻る
-//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-//
-			//			//パートナーシナジーから募集一覧
-			//
-			//			jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			jobcategoryCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーに戻る
-			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーから福利厚生
-			//			welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			welfareCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーに戻る
-			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーから教育・研修
-			//			trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			trainingCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーに戻る
-			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーから社員の声
-			//			voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			voicesCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーに戻る
-			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーからエントリー
-			//			entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			entryCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-			//
-			//			//パートナーシナジーに戻る
-			//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
+			//梅アイコンチェック用インスタンス作成
+			PlumCheck plumCheck = new PlumCheck();
 
-//			//パートナーシナジーからお問合せ
-//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			contactCheck.captureFromPartnersynergy(driver, wait, saveFolder);
-//
-//			//パートナーシナジーに戻る
-//			partnersynergyCheck.backToPartnersynergy(driver, wait, saveFolder);
-//
-//			//トップページに戻る
-//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-//			//パートナーシナジーについてここまで
-//
-//			//サービスについてここから
-//			//トップページからサービスへとぶ
-//			serviceCheck.toService(driver, wait, saveFolder);
-//
-//			//サービスからトップページ
-//			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			topCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//トップページからサービスに戻る(トップページから理念へとぶ)
-//			serviceCheck.toService(driver, wait, saveFolder);
-//
-//			//サービスから会社概要
-//			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			companyCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//サービスに戻る
-//			serviceCheck.backToService(driver, wait, saveFolder);
-//
-//			//サービスから理念
-//			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			philosophyCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//サービスに戻る
-//			serviceCheck.backToService(driver, wait, saveFolder);
-//
-//			//サービスからパートナーシナジー
-//			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			partnersynergyCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//サービスに戻る
-//			serviceCheck.backToService(driver, wait, saveFolder);
-//
-//			//サービスからサービス
-//			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			serviceCheck.captureFromService(driver, wait, saveFolder);
+			//梅アイコンチェック実行
+			//梅アイコンから会社概要へ→キャプチャー
+			plumCheck.toCompany(driver, wait, saveFolder);
 
-//			//サービスに戻る（これいらない）
-//			serviceCheck.backToService(driver, wait, saveFolder);
+			//梅アイコンから理念へ→キャプチャー
+			plumCheck.toPhilosophy(driver, wait, saveFolder);
 
-			//			//サービスから募集一覧
-			//			jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			jobcategoryCheck.captureFromService(driver, wait, saveFolder);
-			//
-			//			//サービスに戻る
-			//			serviceCeck.backToService(driver, wait, saveFolder);
-			//
-			//			//サービスから福利厚生
-			//			welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			welfareCheck.captureFromService(driver, wait, saveFolder);
-			//
-			//			//サービスに戻る
-			//			serviceCeck.backToService(driver, wait, saveFolder);
-			//
-			//			//サービスから教育・研修
-			//			trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			trainingCheck.captureFromService(driver, wait, saveFolder);
-			//
-			//			//サービスに戻る
-			//			serviceCeck.backToService(driver, wait, saveFolder);
-			//
-			//			//サービスから社員の声
-			//			voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			voicesCheck.captureFromService(driver, wait, saveFolder);
-			//
-			//			//サービスに戻る
-			//			serviceCeck.backToService(driver, wait, saveFolder);
-			//
-			//
-			//			//サービスからエントリー
-			//			entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			//			entryCheck.captureFromService(driver, wait, saveFolder);
-			//
-			//			//サービスに戻る
-			//			serviceCeck.backToService(driver, wait, saveFolder);
-//
-//			//サービスからお問合せ
-//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			contactCheck.captureFromServuce(driver, wait, saveFolder);
-//
-//			//サービスに戻る
-//			serviceCheck.backToService(driver, wait, saveFolder);
-//
-//			//トップページに戻る
-//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-//			//サービスについてここまで
+			//梅アイコンからパートナーシナジーへ→キャプチャー
+			plumCheck.toPartnerSynergy(driver, wait, saveFolder);
+
+			//梅アイコンからサービスへ→キャプチャー
+			plumCheck.toService(driver, wait, saveFolder);
+
+			//梅アイコンから募集一覧へ→キャプチャー
+			plumCheck.toJobcategory(driver, wait, saveFolder);
+
+			//梅アイコンから福利厚生へ→キャプチャー
+			plumCheck.toWelfare(driver, wait, saveFolder);
+
+			//梅アイコンから教育・研修へ→キャプチャー
+			plumCheck.toTraining(driver, wait, saveFolder);
+
+			//梅アイコンから社員の声へ→キャプチャー
+			plumCheck.toVoices(driver, wait, saveFolder);
+			//※梅アイコンが表示されている場合、plumCheck.toVoicestoVoicesの中でホームに戻り済み
+			//※梅アイコンが表示されていない場合、ホームのままなので戻る動作いらない
 
 
-			//募集一覧についてここから
-			//トップページから募集一覧へとぶ
+			//ホームからサービスへ→キャプチャー
+			serviceCheck.toService(driver, wait, saveFolder);
+
+			//ホームに戻る
+			//クリック
+			backHomeFromChild(driver, wait);
+
+			//ホームから採用情報へ→キャプチャー
 			jobcategoryCheck.toJobcategory(driver, wait, saveFolder);
 
-			//募集一覧からトップページ
-			topCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			topCheck.captureFromJobcategory(driver, wait, saveFolder);
+			//ホームに戻る
+			//クリック
+			backHomeFromChild(driver, wait);
 
-			//トップページから募集一覧に戻る(トップページから理念へとぶ)
-			jobcategoryCheck.toJobcategory(driver, wait, saveFolder);
+			//ホームからお問合せへ→キャプチャー
+			contactCheck.toContact(driver, wait, saveFolder);
 
-			//募集一覧から会社概要
-			companyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			companyCheck.captureFromJobcategory(driver, wait, saveFolder);
-
-			//募集一覧に戻る
-			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-
-			//募集一覧から理念
-			philosophyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			philosophyCheck.captureFromJobcategory(driver, wait, saveFolder);
-
-			//募集一覧に戻る
-			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-
-			//募集一覧からパートナーシナジー
-			partnersynergyCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			partnersynergyCheck.captureFromJobcategory(driver, wait, saveFolder);
-
-			//募集一覧に戻る
-			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-
-			//募集一覧からサービス
-			serviceCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-			serviceCheck.captureFromJobcategory(driver, wait, saveFolder);
-
-			//募集一覧に戻る
-			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-
-//			//サービスから募集一覧
-//			jobcategoryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			jobcategoryCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//募集一覧に戻る
-//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-//
-//			//募集一覧から福利厚生
-//			welfareCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			welfareCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//募集一覧に戻る
-//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-//
-//			//募集一覧から教育・研修
-//			trainingCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			trainingCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//募集一覧に戻る
-//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-//
-//			//募集一覧から社員の声
-//			voicesCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			voicesCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//募集一覧に戻る
-//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-//
-//
-//			//募集一覧からエントリー
-//			entryCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			entryCheck.captureFromService(driver, wait, saveFolder);
-//
-//			//募集一覧に戻る
-//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-//
-//			//募集一覧からお問合せ
-//			contactCheck.clickAndCaptureFromOther(driver, wait, saveFolder);
-//			contactCheck.captureFromServuce(driver, wait, saveFolder);
-//
-//			//募集一覧に戻る
-//			jobcategoryCheck.backToJobcategory(driver, wait, saveFolder);
-//
-//			//トップページに戻る
-//			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
-//			//募集一覧についてここまで
-
-
+			//ホームに戻る
+			//クリック
+			backHomeFromChild(driver, wait);
 
 
 
@@ -757,6 +320,7 @@ public class SeleniumHokushinHPChrome {
 		} else {
 			//通常メニュー
 			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
+
 		}
 
 	}

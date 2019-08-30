@@ -9,208 +9,126 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ServiceCheck {
-	//トップページからサービスへ遷移のみ
+
+	//パートナーシナジーからサービスへ→キャプチャー
+		public void partnerSynergyToService(WebDriver driver, WebDriverWait wait, String saveFolder)
+				throws IOException, InterruptedException {
+
+			//画面をスクロールさせるためActionクラスのインスタンスを作成
+			Actions act = new Actions(driver);
+
+			//ウィンドウサイズ確認
+			int windowWidth = driver.manage().window().getSize().getWidth();
+
+			//サービスへの遷移
+			if (windowWidth < (992 + 16)) {
+
+				System.out.println("ハンバーガーメニュー");
+
+				//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー）
+				waitAndClick(driver, wait, "body > header > nav > div.w-100 > button", "ハンバーガーメニュー");
+
+				//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第一レベル）
+				waitAndClick(driver, wait, "#Navbar > ul > li:nth-child(3) > a", "メニューサービス");
+
+
+			} else {
+
+				//通常メニュー
+				System.out.println("通常メニュー");
+
+				//クリック対象要素が表示されるまで待つ→クリック（通常メニュー第一レベル）
+				waitAndClick(driver, wait,
+						"#menu-item-20 > a", "メニューサービス");
+
+			}
+
+			//サービスキャプチャー
+			waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "パートナーシナジーからサービス",
+					saveFolder);
+
+			//フッターのロゴまで画面を移動
+			act.moveToElement(driver.findElement(
+					By.cssSelector("#privacymark-logo")));
+			act.perform();
+
+			//サービスキャプチャースクロール後
+			waitAndCapture(driver, wait, "#privacymark-logo", "パートナーシナジーからサービススクロール後", saveFolder);
+
+		}
+
+	//トップページからサービスへ遷移→キャプチャー
 	public void toService(WebDriver driver, WebDriverWait wait, String saveFolder)
 			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
+
+		//画面をスクロールさせるためActionクラスのインスタンスを作成
+		Actions act = new Actions(driver);
+
+		//ウィンドウサイズ確認
+		int windowWidth = driver.manage().window().getSize().getWidth();
+
+		//サービスへの遷移
+		if (windowWidth < (768 + 16)) {
+
+			System.out.println("ハンバーガーメニュー");
+
+			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー）
+			waitAndClick(driver, wait, "body > div.hs-base-container > nav > div.w-100 > button", "ハンバーガーメニュー");
+
+			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第一レベル）
+			waitAndClick(driver, wait, "#Navbar > ul > li:nth-child(3) > a", "メニューサービス");
+
+
+		} else {
+
+			//通常メニュー
+			System.out.println("通常メニュー");
+
+			//クリック対象要素が表示されるまで待つ→クリック（通常メニュー第一レベル）
+			waitAndClick(driver, wait,
+					"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a", "メニューサービス");
+
+		}
+
+		//サービスキャプチャー
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "トップページからサービス",
+				saveFolder);
+
+		//フッターのロゴまで画面を移動
+		act.moveToElement(driver.findElement(
+				By.cssSelector("#privacymark-logo")));
+		act.perform();
+
+		//サービスキャプチャースクロール後
+		waitAndCapture(driver, wait, "#privacymark-logo", "トップページからサービススクロール後", saveFolder);
+
+	}
+
+
+	protected void waitAndClick(WebDriver driver, WebDriverWait wait, String cssSelector, String targetName) {
 
 		//クリック対象要素が表示されるまで待つ
 		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
+				.visibilityOfElementLocated(By.cssSelector(cssSelector)));
 
 		//クリック
-		driver.findElement(By
-				.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
-				.click();
-		System.out.println("サービスクリック");
+		driver.findElement(By.cssSelector(cssSelector)).click();
 
+		//コンソール出力
+		System.out.println(targetName + " クリック");
 	}
 
-	//サービスへ戻る
-	public void backToService(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーのサービス)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"#menu-item-20 > a > span")));
-
-		//クリック(ナビゲーションバーのサービス)
-		driver.findElement(By
-				.cssSelector("#menu-item-20 > a > span"))
-				.click();
-		System.out.println("サービスクリック");
-
-	}
-
-	//トップページからのアクセス
-	protected void clickAndCaptureFromHome(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-
+	protected void waitAndCapture(WebDriver driver, WebDriverWait wait, String cssSelector, String targetName,
+			String saveFolder) throws IOException {
 		//クリック対象要素が表示されるまで待つ
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
 
-		//クリック
-		driver.findElement(By
-				.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
-				.click();
-		System.out.println("サービスクリック");
-
-		//クリック対象要素が表示されるまで待つ（Serviceタイトル）
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(
-						By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-		//キャプチャー
+		//キャプチャー準備
 		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "トップページからサービス");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
 
 		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "トップページからサービススクロール後");
-
+		captureUtil.cupturePage(driver, saveFolder, targetName);
 	}
 
-	//会社概要・理念からのアクセス
-	public void clickAndCaptureFromOther(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-		//クリック対象要素が表示されるまで待つ(ナビゲーションバーのサービス)
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.cssSelector(
-						"#menu-item-20 > a > span")));
-
-		//クリック(ナビゲーションバーのサービス)
-		driver.findElement(By
-				.cssSelector("#menu-item-20 > a > span")).click();
-		System.out.println("サービスクリック");
-
-		//クリック対象要素が表示されるまで待つ（Serviceタイトル）
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(
-						By.cssSelector("body > div.page-contenet.content-out-box.w-max > div > h1 > span")));
-
-		System.out.println("タイトルOK");
-
-	}
-
-	//	会社概要からのアクセスキャプチャー
-	protected void captureFromCompany(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "会社概要からサービス");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "会社概要からサービススクロール後");
-
-	}
-
-	//	理念からのアクセスキャプチャー
-	protected void captureFromPhilosophy(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "理念からサービス");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "理念からサービススクロール後");
-
-	}
-
-	//	パートナーシナジーからのアクセスキャプチャー
-	public void captureFromPartnersynergy(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーからサービス");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "パートナーシナジーからサービススクロール後");
-	}
-
-	//	サービスからのアクセスキャプチャー
-	public void captureFromService(WebDriver driver, WebDriverWait wait, String saveFolder)
-			throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "サービスからサービス");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "サービスからサービススクロール後");
-	}
-
-//	募集一覧からのアクセスキャプチャー
-	public void captureFromJobcategory(WebDriver driver, WebDriverWait wait, String saveFolder)throws IOException, InterruptedException {
-		// TODO 自動生成されたメソッド・スタブ
-		//キャプチャー
-		CaptureUtil captureUtil = new CaptureUtil();
-		captureUtil.cupturePage(driver, saveFolder, "募集一覧からサービス");
-
-		Actions act = new Actions(driver);
-
-		//スクロールさせる
-		act.moveToElement(driver.findElement(By.cssSelector("#privacymark-logo")));
-		act.perform();
-
-		//しばらく待って
-		Thread.sleep(1000);
-
-		//キャプチャー
-		captureUtil.cupturePage(driver, saveFolder, "募集一覧からサービススクロール後");
-
-	}
 
 }
