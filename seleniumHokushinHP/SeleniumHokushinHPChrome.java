@@ -47,6 +47,7 @@ public class SeleniumHokushinHPChrome {
 
 		// 指定のウィンドウサイズに変更
 //		int width = 1200 + 15;
+		//ハンバーガーメニュー表示させるウィンドウサイズ
 		int width = 768 + 15;
 		// 梅アイコン表示させるウィンドウサイズ
 //		int width = 1201 + 15;

@@ -209,7 +209,7 @@ public class PlumCheck {
 
 			//クリック対象要素が表示されるまで待つ→クリック（梅アイコン左から五番目）
 			waitAndClick(driver, wait,
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(4) > div > p.hs-icon > a",
+					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(5) > div > p.hs-icon > a",
 					"梅アイコン左から五番目");
 
 			//募集一覧キャプチャー
@@ -253,7 +253,7 @@ public class PlumCheck {
 
 			//クリック対象要素が表示されるまで待つ→クリック（梅アイコン左から六番目）
 			waitAndClick(driver, wait,
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(4) > div > p.hs-icon > a",
+					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(6) > div > p.hs-icon > a",
 					"梅アイコン左から六番目");
 
 			//福利厚生キャプチャー
@@ -297,8 +297,9 @@ public class PlumCheck {
 
 			//クリック対象要素が表示されるまで待つ→クリック（梅アイコン左から七番目）
 			waitAndClick(driver, wait,
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(4) > div > p.hs-icon > a",
+					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(7) > div > p.hs-icon > a",
 					"梅アイコン左から七番目");
+
 
 			//教育・研修キャプチャー
 			waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span",
@@ -341,7 +342,7 @@ public class PlumCheck {
 
 			//クリック対象要素が表示されるまで待つ→クリック（梅アイコン左から八番目）
 			waitAndClick(driver, wait,
-					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(4) > div > p.hs-icon > a",
+					"body > div.hs-base-container > div:nth-child(3) > div > div:nth-child(8) > div > p.hs-icon > a",
 					"梅アイコン左から八番目");
 
 			//社員の声キャプチャー
