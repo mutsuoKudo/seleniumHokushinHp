@@ -1243,7 +1243,7 @@ public class JobcategoryCheck {
 		}
 
 		//福利厚生キャプチャー
-		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "会社概要から福利厚生",
+		waitAndCapture(driver, wait, "body > div.page-contenet.content-out-box.w-max > div > h1 > span", "募集一覧から福利厚生",
 				saveFolder);
 
 		//フッターのロゴまで画面を移動
@@ -1251,7 +1251,7 @@ public class JobcategoryCheck {
 		act.perform();
 
 		//福利厚生キャプチャースクロール後
-		waitAndCapture(driver, wait, "#privacymark-logo", "会社概要から福利厚生スクロール後", saveFolder);
+		waitAndCapture(driver, wait, "#privacymark-logo", "募集一覧から福利厚生スクロール後", saveFolder);
 
 	}
 
