@@ -9,31 +9,34 @@ import javax.swing.JOptionPane;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SeleniumHokushinHPChrome {
+public class seleniumHokushinHPFireFox {
 
 	//現在時刻格納用
-		public static LocalDateTime nowLocalDt = LocalDateTime.now();;
+	public static LocalDateTime nowLocalDt = LocalDateTime.now();;
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
+		 // declaration and instantiation of objects/variables
+    	System.setProperty("webdriver.firefox.marionette","./exe/geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();
+		//comment the above 2 lines and uncomment below 2 lines to use Chrome
+		//System.setProperty("webdriver.chrome.driver","G:\\chromedriver.exe");
+		//WebDriver driver = new ChromeDriver();
 
-		//chromeドライバの設定 Chromeを使用するよという設定
-		System.setProperty("webdriver.chrome.driver", "./exe/chromedriver.exe");
-		ChromeOptions options = new ChromeOptions();
+        String baseUrl = "http://hokusys.jp/";
 
-		//実行する前にメモリをクリアさせる
-		options.addArguments("--purge-memory-button");
 
-		//        見えないところでやる
-		//        options.addArguments("--headless");
+        // launch Fire fox and direct it to the Base URL
+        driver.get(baseUrl);
 
-		WebDriver driver = new ChromeDriver(options);
+
+
+
 		//待ち時間を設定 今回は22秒
 		WebDriverWait wait = new WebDriverWait(driver, 22);
 
@@ -43,19 +46,19 @@ public class SeleniumHokushinHPChrome {
 		String saveFolder = "./screenShots/";
 
 		//カレントウインドウを最大化する
-//		driver.manage().window().maximize();
+		//	driver.manage().window().maximize();
 
 		// 指定のウィンドウサイズに変更
 //		int width = 1200 + 15;
 		//ハンバーガーメニュー表示させるウィンドウサイズ
-		int width = 768 + 15;
+//		int width = 767 + 15;
 		// 梅アイコン表示させるウィンドウサイズ
-//		int width = 1201 + 15;
+			int width = 1201 + 15;
 		int height = 1000;
 		driver.manage().window().setSize(new Dimension(width, height));
 
 		//driverはchromeがはいっている
-		driver.get("http://hokusys.jp/");
+//		driver.get("http://hokusys.jp/");
 
 		try {
 
