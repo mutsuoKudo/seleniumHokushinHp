@@ -3,14 +3,15 @@ package seleniumHokushinHP;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TopCheck {
+public class TopCheckIE {
 
-	//トップページからトップページへ遷移→キャプチャー
+	//IEトップページからIEトップページへ遷移→キャプチャー
 	public void toTop(WebDriver driver, WebDriverWait wait, String saveFolder)
 			throws IOException, InterruptedException {
 
@@ -20,13 +21,11 @@ public class TopCheck {
 		//ウィンドウサイズ確認
 		int windowWidth = driver.manage().window().getSize().getWidth();
 
-		//企業情報への遷移
-		if (windowWidth < (768 + 16)) {
-
+		if (windowWidth < (992 + 16)) {
 			System.out.println("ハンバーガーメニュー");
 
 			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー）
-			waitAndClick(driver, wait, "body > div.hs-base-container > nav > div.w-100 > button", "ハンバーガーメニュー");
+			waitAndClick(driver, wait, "body > header > nav > div.w-100 > button", "ハンバーガーメニュー");
 
 			//クリック対象要素が表示されるまで待つ→クリック（ハンバーガーメニュー第一レベル）
 			waitAndClick(driver, wait, "#Navbar > ul > li.nav-item.mt-4.mb-2 > a", "メニューホーム");
@@ -38,32 +37,22 @@ public class TopCheck {
 
 			//クリック対象要素が表示されるまで待つ→クリック（通常メニュー第一レベル）
 			waitAndClick(driver, wait,
-					"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(1) > a", "メニューホーム");
+					"#menu-item-18 > a", "メニューホーム");
 
 		}
 
-		//トップページキャプチャー
-		waitAndCapture(driver, wait, "body > div.hs-base-container > nav > div.w-100 > a > img", "トップページからトップページ",
+		//IEトップページキャプチャー
+		waitAndCapture(driver, wait, "#main-copy",
+				"IEトップページからIEトップページ",
 				saveFolder);
 
-		//フッターのロゴまで画面を移動
-		act.moveToElement(driver.findElement(
-				By.cssSelector("#privacymark-logo")));
-		act.perform();
+		//画面下部までスクロール
+		((JavascriptExecutor) driver).executeScript("scroll(0,20000);");
 
-		//トップページキャプチャースクロール後
-		waitAndCapture(driver, wait, "#privacymark-logo", "トップページからトップページスクロール後", saveFolder);
-
-		//フッターのロゴまで画面を移動
-		act.moveToElement(driver.findElement(
-				By.cssSelector("body > div.hs-base-container > nav > div.w-100 > a > img")));
-		act.perform();
+		//IEトップページキャプチャースクロール後
+		waitAndCapture(driver, wait, "#privacymark-logo", "IEトップページからIEトップページスクロール後", saveFolder);
 
 	}
-
-
-
-
 
 	protected void waitAndClick(WebDriver driver, WebDriverWait wait, String cssSelector, String targetName) {
 
@@ -89,4 +78,5 @@ public class TopCheck {
 		//キャプチャー
 		captureUtil.cupturePage(driver, saveFolder, targetName);
 	}
+
 }
