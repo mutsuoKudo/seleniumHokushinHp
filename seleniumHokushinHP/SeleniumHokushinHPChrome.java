@@ -48,7 +48,7 @@ public class SeleniumHokushinHPChrome {
 		driver.manage().window().setSize(new Dimension(width, height));
 
 		//driverはchromeがはいっている→https://ae1036569i.smartrelease.jpに遷移しろというている
-		driver.get("https://ae1036569i.smartrelease.jp");
+		driver.get("http://hokusys.jp");
 
 		try {
 
