@@ -43,8 +43,8 @@ public class SeleniumHokushinHPChrome {
 		//		driver.manage().window().maximize();
 
 		// 指定のウィンドウサイズに変更
-		int width = 992 + 15;
-		int height = 720;
+		int width = 1300 + 15;
+		int height = 730;
 		driver.manage().window().setSize(new Dimension(width, height));
 
 		//driverはchromeがはいっている→https://ae1036569i.smartrelease.jpに遷移しろというている
@@ -84,19 +84,6 @@ public class SeleniumHokushinHPChrome {
 			ServiceCheck serviceCheck = new ServiceCheck();
 			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 
-			//終了のためしばらく待って
-			Thread.sleep(500); // Let the user actually see something!
-
-			//chrome終了
-			driver.quit();
-
-			JOptionPane pane = new JOptionPane("処理が終了しました。", JOptionPane.INFORMATION_MESSAGE);
-			JDialog dialog = pane.createDialog(null, "seleniumHokushinHp");
-			dialog.setAlwaysOnTop(true);
-			dialog.setVisible(true);
-			System.out.println("*** 終了メッセージ表示終了");
-			dialog.dispose();
-
 		} catch (InterruptedException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -104,6 +91,192 @@ public class SeleniumHokushinHPChrome {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+
+		driver.get("https://atmick.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#side-a > div:nth-child(16) > div.sidebar-body > ul > li > a", "＠ミックシンキングのリンク");
+
+		//ちょっとだけ待つ
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e2) {
+			// TODO 自動生成された catch ブロック
+			e2.printStackTrace();
+		} // Let the user actually see something!
+
+		//企業情報準備
+		CompanyCheck companyCheck = new CompanyCheck();
+
+		//企業情報（会社概要）
+		try {
+			companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "会社概要");
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://atmick.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#main > div:nth-child(3) > div.articles-body > a:nth-child(174)",
+				"＠ミックシンキングの記事リンク");
+
+		//ちょっとだけ待つ
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e2) {
+			// TODO 自動生成された catch ブロック
+			e2.printStackTrace();
+		} // Let the user actually see something!
+
+		//ホームに戻る
+		String currUrl = driver.getCurrentUrl();
+		System.out.println(currUrl);
+		//クリック
+		if (!(currUrl.equals("http://hokusys.jp/"))) {
+			backHomeFromChild(driver, wait);
+		}
+
+		//企業情報（パートナーシナジー）
+		try {
+			companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "パートナーシナジー");
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://tetsuwangenshi.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#side-a > div:nth-child(13) > div.sidebar-body > ul > li > a", "鉄腕原子のリンク");
+
+		//企業情報（会社概要）
+		try {
+			companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "会社概要");
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://tetsuwangenshi.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#main > div:nth-child(3) > div.articles-body > a:nth-child(13)",
+				"鉄腕原子の記事リンク");
+
+		//ホームに戻る
+		currUrl = driver.getCurrentUrl();
+		System.out.println(currUrl);
+		//クリック
+		if (!(currUrl.equals("http://hokusys.jp/"))) {
+			backHomeFromChild(driver, wait);
+		}
+
+		//企業情報（パートナーシナジー）
+		try {
+			companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "パートナーシナジー");
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://tetsuwangenshi.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#main > div:nth-child(6) > div.articles-body > a:nth-child(13)",
+				"鉄腕原子の記事リンク");
+
+		//ホームに戻る
+		currUrl = driver.getCurrentUrl();
+		System.out.println(currUrl);
+		//クリック
+		if (!(currUrl.equals("http://hokusys.jp/"))) {
+			backHomeFromChild(driver, wait);
+		}
+
+		//企業情報（パートナーシナジー）
+		try {
+			companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "理念");
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://tetsuwangenshi.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#main > div:nth-child(9) > div.articles-body > a:nth-child(13)",
+				"鉄腕原子の記事リンク");
+
+		//ホームに戻る
+		currUrl = driver.getCurrentUrl();
+		System.out.println(currUrl);
+		//クリック
+		if (!(currUrl.equals("http://hokusys.jp/"))) {
+			backHomeFromChild(driver, wait);
+		}
+
+		ServiceCheck serviceCheck = new ServiceCheck();
+		try {
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://tetsuwangenshi.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#main > div:nth-child(12) > div.articles-body > a:nth-child(13)",
+				"鉄腕原子の記事リンク");
+
+		//ホームに戻る
+		currUrl = driver.getCurrentUrl();
+		System.out.println(currUrl);
+		//クリック
+		if (!(currUrl.equals("http://hokusys.jp/"))) {
+			backHomeFromChild(driver, wait);
+		}
+
+		try {
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		//終了のためしばらく待って
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} // Let the user actually see something!
+
+		//chrome終了
+		driver.quit();
+
+		JOptionPane pane = new JOptionPane("処理が終了しました。", JOptionPane.INFORMATION_MESSAGE);
+		JDialog dialog = pane.createDialog(null, "seleniumHokushinHp");
+		dialog.setAlwaysOnTop(true);
+		dialog.setVisible(true);
+		System.out.println("*** 終了メッセージ表示終了");
+		dialog.dispose();
 	}
 
 	protected static void backHomeFromChild(WebDriver driver, WebDriverWait wait) {
@@ -127,5 +300,18 @@ public class SeleniumHokushinHPChrome {
 			driver.findElement(By.cssSelector("#menu-item-18 > a > span")).click();
 		}
 
+	}
+
+	protected static void waitAndClick(WebDriver driver, WebDriverWait wait, String cssSelector, String targetName) {
+
+		//クリック対象要素が表示されるまで待つ
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.cssSelector(cssSelector)));
+
+		//クリック
+		driver.findElement(By.cssSelector(cssSelector)).click();
+
+		//コンソール出力
+		System.out.println(targetName + " クリック");
 	}
 }

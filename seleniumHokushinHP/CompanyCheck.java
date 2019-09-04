@@ -121,20 +121,20 @@ public class CompanyCheck {
 			//			//デフォルトのwindowHandleを格納
 			//			String mainWindowHandle = driver.getWindowHandle();
 			//
-			//クリック対象要素が表示されるまで待つ
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
-					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)")));
-
-			//クリック
-			driver.findElement(By.cssSelector(
-					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)"))
-					.click();
-			//しばらく待って
-			Thread.sleep(1000);
-			//キャプチャ
-			captureUtil.cupturePage(driver, saveFolder, "ぷろくま");
-
-			driver.navigate().refresh();
+//			//クリック対象要素が表示されるまで待つ
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+//					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)")));
+//
+//			//クリック
+//			driver.findElement(By.cssSelector(
+//					"body > div.page-contenet.content-out-box.w-max > div > div:nth-child(3) > div > a:nth-child(7)"))
+//					.click();
+//			//しばらく待って
+//			Thread.sleep(1000);
+//			//キャプチャ
+//			captureUtil.cupturePage(driver, saveFolder, "ぷろくま");
+//
+//			driver.navigate().refresh();
 			//
 			//			//デフォルトのwindowHandleにスイッチ
 			//			driver.switchTo().window(mainWindowHandle);
