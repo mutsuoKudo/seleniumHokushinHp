@@ -227,6 +227,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		ServiceCheck serviceCheck = new ServiceCheck();
+
 		try {
 			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
 		} catch (IOException e1) {
@@ -252,6 +253,30 @@ public class SeleniumHokushinHPChrome {
 
 		try {
 			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+		} catch (IOException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
+		driver.get("https://tetsuwangenshi.blog.so-net.ne.jp/");
+
+		waitAndClick(driver, wait, "#main > div:nth-child(15) > div.articles-body > a:nth-child(13)",
+				"鉄腕原子の記事リンク");
+
+		//ホームに戻る
+		currUrl = driver.getCurrentUrl();
+		System.out.println(currUrl);
+		//クリック
+		if (!(currUrl.equals("http://hokusys.jp/"))) {
+			backHomeFromChild(driver, wait);
+		}
+
+		//企業情報（会社概要）
+		try {
+			companyCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "会社概要");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
