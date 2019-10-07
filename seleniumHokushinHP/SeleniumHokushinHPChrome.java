@@ -120,7 +120,7 @@ public class SeleniumHokushinHPChrome {
 
 		driver.get("https://atmick.blog.so-net.ne.jp/");
 
-		waitAndClick(driver, wait, "#main > div:nth-child(3) > div.articles-body > a:nth-child(174)",
+		waitAndClick(driver, wait, "#main > div:nth-child(3) > div.articles-body > a:nth-child(248)",
 				"＠ミックシンキングの記事リンク");
 
 		//ちょっとだけ待つ
