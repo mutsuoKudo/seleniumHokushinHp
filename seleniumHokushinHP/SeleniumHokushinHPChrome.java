@@ -80,9 +80,16 @@ public class SeleniumHokushinHPChrome {
 			backHomeFromChild(driver, wait);
 
 			//サービス
-
+			//サービス
 			ServiceCheck serviceCheck = new ServiceCheck();
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "サービス");
+
+			//ホームに戻る
+			//クリック
+			backHomeFromChild(driver, wait);
+
+			//ビジネスパートナー募集
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "ビジネスパートナー募集");
 
 		} catch (InterruptedException e) {
 			// TODO 自動生成された catch ブロック
@@ -229,7 +236,7 @@ public class SeleniumHokushinHPChrome {
 		ServiceCheck serviceCheck = new ServiceCheck();
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "サービス");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -252,7 +259,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "ビジネスパートナー募集");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -275,7 +282,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "サービス");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -298,7 +305,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "ビジネスパートナー募集");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -321,7 +328,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "サービス");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -344,7 +351,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "ビジネスパートナー募集");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -367,7 +374,7 @@ public class SeleniumHokushinHPChrome {
 		}
 
 		try {
-			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder);
+			serviceCheck.clickAndCaptureFromHome(driver, wait, saveFolder, "サービス");
 		} catch (IOException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();

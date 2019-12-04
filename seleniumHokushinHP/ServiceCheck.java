@@ -10,11 +10,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ServiceCheck {
 
-	protected void clickAndCaptureFromHome(WebDriver driver, WebDriverWait wait, String saveFolder) throws IOException, InterruptedException {
+	protected void clickAndCaptureFromHome(WebDriver driver, WebDriverWait wait, String saveFolder, String saimoku) throws IOException, InterruptedException {
 		//サービス
+		//CSSSelector格納用(サブメニュー）
+				String cssSelectorSub = null;
 
 		//ウィンドウサイズ確認
 				int windowWidth = driver.manage().window().getSize().getWidth();
+
+		//サブメニュー設定
+				switch (saimoku) {
+				case "サービス":
+					cssSelectorSub = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(1) > a";
+					break;
+				case "ビジネスパートナー募集":
+					cssSelectorSub = "body > div.hs-base-container > div.hs-nav > nav > div > div.d-inline-block.show > ul > li:nth-child(2) > a";
+					break;
+				default:
+					System.out.println("エラー：サービスに存在しない細目を処理しようとしました。");
+					return;
+				}
 
 		//ホーム画面のメニュー選択
 		if (windowWidth < (768 + 16)) {
@@ -37,7 +52,7 @@ public class ServiceCheck {
 					By.cssSelector("#Navbar > ul > li:nth-child(3) > a")).click();
 		}else {
 			//通常メニュー
-			//クリック対象要素が表示されるまで待つ
+			//クリック対象要素が表示されるまで待つ(サービスメニュー）
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(By.cssSelector(
 							"body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span")));
@@ -45,6 +60,15 @@ public class ServiceCheck {
 			//クリック
 			driver.findElement(
 					By.cssSelector("body > div.hs-base-container > div.hs-nav > nav > div > div:nth-child(3) > a > span"))
+					.click();
+
+			//クリック対象要素が表示されるまで待つ(サービスサブメニュー）
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.cssSelector(cssSelectorSub)));
+
+			//クリック
+			driver.findElement(
+					By.cssSelector(cssSelectorSub))
 					.click();
 		}
 
