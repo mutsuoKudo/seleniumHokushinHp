@@ -80,7 +80,7 @@ public class ServiceCheck {
 
 		CaptureUtil captureUtil = new CaptureUtil();
 
-		captureUtil.cupturePage(driver,  saveFolder,"サービス");
+		captureUtil.cupturePage(driver,  saveFolder, saimoku);
 
 		//スクロールさせたい場合（例）;
 		//画面をスクロールさせるためActionクラスのインスタンスを作成
